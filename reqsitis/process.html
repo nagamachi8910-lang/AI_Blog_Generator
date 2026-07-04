@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Luminous AI - Generating Your Blog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface-variant": "#464555",
+                        "surface-container-highest": "#e1e3e4",
+                        "outline-variant": "#c7c4d8",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fa",
+                        "on-primary-container": "#dad7ff",
+                        "surface-dim": "#d9dadb",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-high": "#e7e8e9",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "primary-container": "#4f46e5",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-primary-fixed": "#0f0069",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-surface": "#2e3132",
+                        "tertiary": "#00505f",
+                        "on-tertiary-fixed": "#001f26",
+                        "tertiary-container": "#006a7c",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "tertiary-fixed": "#acedff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "primary": "#3525cd",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-container": "#8a4cfc",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "outline": "#777587",
+                        "on-tertiary-container": "#93e8ff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#5a00c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "2.5rem",
+                        "container-max": "1280px",
+                        "xs": "0.5rem",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xl": "4rem",
+                        "sm": "1rem",
+                        "md": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #712ae2 100%);
+        }
+
+        .blur-backdrop {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased">
+    <!-- TopNavBar -->
+    <header
+        class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-container-max mx-auto shadow-sm bg-surface-container-lowest dark:bg-surface-dim">
+        <div class="flex items-center gap-sm">
+            <span class="font-display text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Luminous
+                AI</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Pricing</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Community</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Docs</a>
+        </nav>
+        <div class="flex items-center gap-md">
+            <div class="relative hidden sm:block">
+                <input
+                    class="bg-surface-container-low border-none rounded-full py-xs px-md pl-lg text-label-md focus:ring-2 focus:ring-primary w-48"
+                    placeholder="Search..." type="text" />
+                <span
+                    class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+            </div>
+            <button
+                class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">notifications</button>
+            <button
+                class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">settings</button>
+            <div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+                <img class="w-full h-full object-cover"
+                    data-alt="A professional studio portrait of a young tech entrepreneur with a clean, minimalist background. Soft, directional lighting highlights their friendly expression, capturing a modern professional aesthetic that fits a high-end AI platform. The color palette is composed of soft grays and crisp whites."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4Iyx2UgyqNFRneb8rBJdbpQYV48QqPGef6XiiCy7hDbO30Z2LWjl_pgeJ5Pki6c5iHuAlcNWe8UL4xB03kaSgHab8Sg_x6W-l3XBiVyMDuxadk5vetpJ_HsujsyBrMaHCbZF3yRO4KqfD32R4YTab-kKIMTUW9NyDrQTTGxJKQE6enKCYuR-WSAa2oJKLHwMIzganONCPuS2MP75QExs-i1vH_yBeZVcR_oeBGpTImzb60wRDLYxY5Q" />
+            </div>
+        </div>
+    </header>
+    <!-- SideNavBar -->
+    <aside
+        class="fixed left-0 top-0 h-full flex flex-col p-md z-40 border-r border-outline-variant bg-surface-container-low w-64 pt-24">
+        <div class="flex flex-col gap-xs flex-grow">
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+            <a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-xl p-md font-label-md text-label-md shadow-sm"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                Generator
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="article">article</span>
+                My Blogs
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Analytics
+            </a>
+        </div>
+        <div class="mt-auto flex flex-col gap-xs">
+            <div class="p-md mb-md bg-primary/10 rounded-xl">
+                <p class="font-label-sm text-label-sm text-primary mb-2">PRO PLAN</p>
+                <p class="font-body-md text-label-md text-on-surface-variant mb-4">Unlock advanced models &amp; priority
+                    generation.</p>
+                <button
+                    class="w-full py-2 accent-gradient text-white rounded-lg font-label-md text-label-md hover:opacity-90 transition-all">Upgrade
+                    Pro</button>
+            </div>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="help">help</span>
+                Help
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 pt-24 pb-12 px-lg min-h-screen flex flex-col items-center">
+        <div class="max-w-4xl w-full">
+            <!-- Header Section -->
+            <div class="text-center mb-xl">
+                <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Generating Your Blog</h1>
+                <p class="font-body-md text-body-md text-on-surface-variant">Please wait while our AI creates your
+                    content. This usually takes 3-5 minutes.</p>
+            </div>
+            <!-- Main Progress Card -->
+            <div
+                class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden mb-lg">
+                <div class="p-xl flex flex-col items-center border-b border-outline-variant/20">
+                    <!-- Circular Progress -->
+                    <div class="relative w-48 h-48 mb-8">
+                        <svg class="w-full h-full" viewbox="0 0 100 100">
+                            <circle class="text-surface-container stroke-current" cx="50" cy="50" fill="transparent"
+                                r="44" stroke-width="8"></circle>
+                            <circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50"
+                                fill="transparent" r="44" stroke-dasharray="276.46" stroke-dashoffset="96.76"
+                                stroke-linecap="round" stroke-width="8"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="font-display text-[42px] font-bold text-on-surface">65%</span>
+                            <span
+                                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Overall</span>
+                        </div>
+                    </div>
+                    <!-- Real-time Metrics Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-md w-full">
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-primary mb-1"
+                                style="font-size: 20px;">timer</span>
+                            <span class="font-label-sm text-on-surface-variant">Remaining</span>
+                            <span class="font-label-md font-bold text-on-surface">2m 15s</span>
+                        </div>
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-primary mb-1"
+                                style="font-size: 20px;">neurology</span>
+                            <span class="font-label-sm text-on-surface-variant">LLM Model</span>
+                            <span class="font-label-md font-bold text-on-surface">GPT-4o</span>
+                        </div>
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-primary mb-1"
+                                style="font-size: 20px;">image</span>
+                            <span class="font-label-sm text-on-surface-variant">Visuals</span>
+                            <span class="font-label-md font-bold text-on-surface">DALL-E 3</span>
+                        </div>
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-primary mb-1"
+                                style="font-size: 20px;">notes</span>
+                            <span class="font-label-sm text-on-surface-variant">Word Count</span>
+                            <span class="font-label-md font-bold text-on-surface">1,240</span>
+                        </div>
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-primary mb-1"
+                                style="font-size: 20px;">photo_library</span>
+                            <span class="font-label-sm text-on-surface-variant">Images</span>
+                            <span class="font-label-md font-bold text-on-surface">4 / 6</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pipeline Steps -->
+                <div class="p-lg">
+                    <h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-md">
+                        Generation Pipeline</h3>
+                    <div class="space-y-sm">
+                        <!-- Step: Completed -->
+                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+                                <span class="material-symbols-outlined text-[18px]"
+                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Understanding
+                                Topic &amp; Intent</span>
+                        </div>
+                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+                                <span class="material-symbols-outlined text-[18px]"
+                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Researching
+                                Competitive Content</span>
+                        </div>
+                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+                                <span class="material-symbols-outlined text-[18px]"
+                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Creating
+                                Semantic Outline</span>
+                        </div>
+                        <!-- Step: In Progress -->
+                        <div class="flex items-center gap-md p-sm bg-primary/5 border border-primary/20 rounded-lg">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary relative">
+                                <span class="material-symbols-outlined animate-spin"
+                                    style="font-size: 18px;">progress_activity</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-label-md font-bold text-on-surface">Generating AI Hero Images</span>
+                                <span class="font-label-sm text-primary text-[11px] uppercase font-bold">In
+                                    Progress...</span>
+                            </div>
+                        </div>
+                        <!-- Steps: Pending -->
+                        <div class="flex items-center gap-md p-sm opacity-40">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant">Structuring Data Tables &amp;
+                                Comparisons</span>
+                        </div>
+                        <div class="flex items-center gap-md p-sm opacity-40">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant">Optimizing for Search Intent
+                                (SEO)</span>
+                        </div>
+                        <div class="flex items-center gap-md p-sm opacity-40">
+                            <div
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+                            </div>
+                            <span class="font-label-md text-on-surface-variant">Final Rendering &amp; Export</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Console Activity Feed -->
+            <div class="bg-[#1e1e1e] rounded-xl p-md shadow-lg overflow-hidden border border-[#333]">
+                <div class="flex items-center gap-xs mb-md border-b border-[#333] pb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    <span class="text-[10px] text-white/40 uppercase ml-md font-mono tracking-widest">Live Activity
+                        Log</span>
+                </div>
+                <div class="font-mono text-[13px] space-y-1.5 h-32 overflow-y-auto custom-scrollbar">
+                    <p class="text-green-400"><span class="text-white/30">[14:22:10]</span> SUCCESS: Semantic outline
+                        created with 8 H2 headings.</p>
+                    <p class="text-green-400"><span class="text-white/30">[14:22:45]</span> SUCCESS: Content draft
+                        generated (1,240 words).</p>
+                    <p class="text-white/80"><span class="text-white/30">[14:23:02]</span> INFO: Initiating Image
+                        Generation via DALL-E 3...</p>
+                    <p class="text-blue-400"><span class="text-white/30">[14:23:15]</span> TASK: Generating Hero Image 1
+                        of 6: "Modern Workspace Architecture"</p>
+                    <p class="text-blue-400"><span class="text-white/30">[14:23:42]</span> TASK: Generating Detail Image
+                        2 of 6: "Neural Network Visualization"</p>
+                    <p class="text-green-400"><span class="text-white/30">[14:24:05]</span> SUCCESS: Image 1 and 2
+                        uploaded to CDN.</p>
+                    <p class="text-blue-400 animate-pulse"><span class="text-white/30">[14:24:12]</span> TASK:
+                        Generating Content Image 3 of 6...</p>
+                </div>
+            </div>
+            <!-- Action Footer -->
+            <div class="mt-lg flex items-center justify-center gap-md">
+                <button
+                    class="px-lg py-md text-primary font-label-md hover:bg-primary/5 rounded-xl transition-all border border-transparent hover:border-primary/20">
+                    Cancel Generation
+                </button>
+                <button
+                    class="px-xl py-md accent-gradient text-white font-label-md rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-sm">
+                    <span class="material-symbols-outlined text-[18px]">tab</span>
+                    Run in Background
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- Floating Atmosphere -->
+    <div class="fixed top-0 right-0 -z-10 w-1/2 h-full opacity-30 pointer-events-none">
+        <div
+            class="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse">
+        </div>
+        <div class="absolute bottom-[20%] right-[30%] w-[300px] h-[300px] bg-secondary/10 rounded-full blur-[100px]">
+        </div>
+    </div>
+    <script>
+        // Micro-interaction for circular progress
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100 * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+
+        // Initialize progress at 65%
+        setTimeout(() => setProgress(65), 500);
+
+        // Simple activity log auto-scroll
+        const log = document.querySelector('.font-mono');
+        setInterval(() => {
+            log.scrollTop = log.scrollHeight;
+        }, 3000);
+    </script>
+</body>
+
+</html>

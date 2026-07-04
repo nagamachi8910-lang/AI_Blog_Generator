@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Aetheris AI - Profile Skeleton</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-container": "#edeeef",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#dad7ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#006a7c",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-high": "#e7e8e9",
+                        "primary-fixed": "#e2dfff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface": "#191c1d",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-fixed": "#acedff",
+                        "tertiary": "#00505f",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed": "#eaddff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "primary": "#3525cd",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#4f46e5",
+                        "secondary-container": "#8a4cfc",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fa",
+                        "on-primary-fixed": "#0f0069",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "surface-container-low": "#f3f4f5",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-secondary-fixed": "#25005a",
+                        "outline": "#777587",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary": "#712ae2",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#4d44e3",
+                        "inverse-surface": "#2e3132"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "sm": "1rem",
+                        "md": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #edeeef 25%, #f8f9fa 50%, #edeeef 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <header
+        class="fixed top-0 w-full z-50 shadow-sm bg-surface flex justify-between items-center px-lg py-sm max-w-container-max mx-auto left-0 right-0">
+        <div class="flex items-center gap-md">
+            <span class="font-display text-headline-md font-bold text-primary">Aetheris AI</span>
+            <nav class="hidden md:flex items-center gap-md ml-lg">
+                <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200"
+                    href="#">Dashboard</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200"
+                    href="#">Projects</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200"
+                    href="#">Templates</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200"
+                    href="#">Billing</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-sm">
+            <div class="hidden md:flex bg-surface-container rounded-full px-sm py-xs items-center gap-xs">
+                <span class="material-symbols-outlined text-outline">search</span>
+                <div class="skeleton h-4 w-32 rounded"></div>
+            </div>
+            <span
+                class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-xs rounded-full">notifications</span>
+            <div class="w-8 h-8 rounded-full skeleton"></div>
+        </div>
+    </header>
+    <!-- Side Navigation Bar -->
+    <aside
+        class="fixed left-0 top-0 h-full w-64 pt-20 flex flex-col gap-2 p-md bg-surface-container-lowest border-r border-outline-variant/30 hidden md:flex">
+        <div class="flex items-center gap-sm mb-lg px-xs">
+            <div class="w-12 h-12 rounded-full skeleton"></div>
+            <div class="flex flex-col gap-1">
+                <div class="h-4 w-24 skeleton rounded"></div>
+                <div class="h-3 w-16 skeleton rounded"></div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-container-high transition-all">
+                <span class="material-symbols-outlined text-outline">dashboard</span>
+                <span class="font-label-md text-label-md">Overview</span>
+            </div>
+            <div class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-container-high transition-all">
+                <span class="material-symbols-outlined text-outline">auto_awesome</span>
+                <span class="font-label-md text-label-md">Generations</span>
+            </div>
+            <div class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-container-high transition-all">
+                <span class="material-symbols-outlined text-outline">folder_open</span>
+                <span class="font-label-md text-label-md">Assets</span>
+            </div>
+            <div class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-container-high transition-all">
+                <span class="material-symbols-outlined text-outline">analytics</span>
+                <span class="font-label-md text-label-md">Usage</span>
+            </div>
+            <div
+                class="flex items-center gap-sm p-sm bg-primary-container text-on-primary-container rounded-lg font-bold">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </div>
+            <div class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-container-high transition-all">
+                <span class="material-symbols-outlined text-outline">contact_support</span>
+                <span class="font-label-md text-label-md">Support</span>
+            </div>
+        </div>
+        <div class="mt-auto pt-lg border-t border-outline-variant/20 flex flex-col gap-2">
+            <div class="p-sm bg-surface-container rounded-xl flex flex-col gap-2">
+                <div class="h-4 w-full skeleton rounded"></div>
+                <div class="h-8 w-full skeleton rounded-lg"></div>
+            </div>
+            <div class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-label-md text-label-md">Sign Out</span>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 pt-24 px-lg pb-xl min-h-screen">
+        <div class="max-w-4xl mx-auto">
+            <!-- Page Header Skeleton -->
+            <div class="mb-lg">
+                <div class="h-10 w-48 skeleton rounded-lg mb-2"></div>
+                <div class="h-4 w-72 skeleton rounded"></div>
+            </div>
+            <!-- Profile & Settings Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+                <!-- Profile Section Card -->
+                <section
+                    class="md:col-span-12 bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/10">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-lg">
+                        <div class="relative">
+                            <div class="w-32 h-32 rounded-full skeleton ring-4 ring-surface-container-low shadow-lg">
+                            </div>
+                            <div
+                                class="absolute bottom-1 right-1 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary shadow-md cursor-pointer">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full flex flex-col gap-md">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                                <div class="flex flex-col gap-xs">
+                                    <div class="h-3 w-20 skeleton rounded opacity-60"></div>
+                                    <div class="h-12 w-full skeleton rounded-lg"></div>
+                                </div>
+                                <div class="flex flex-col gap-xs">
+                                    <div class="h-3 w-20 skeleton rounded opacity-60"></div>
+                                    <div class="h-12 w-full skeleton rounded-lg"></div>
+                                </div>
+                                <div class="flex flex-col gap-xs">
+                                    <div class="h-3 w-20 skeleton rounded opacity-60"></div>
+                                    <div class="h-12 w-full skeleton rounded-lg"></div>
+                                </div>
+                                <div class="flex flex-col gap-xs">
+                                    <div class="h-3 w-20 skeleton rounded opacity-60"></div>
+                                    <div class="h-12 w-full skeleton rounded-lg"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end gap-sm mt-xs">
+                                <div class="h-10 w-24 skeleton rounded-lg"></div>
+                                <div class="h-10 w-32 skeleton rounded-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Appearance Section -->
+                <section
+                    class="md:col-span-7 bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/10">
+                    <div class="flex items-center gap-sm mb-md">
+                        <span class="material-symbols-outlined text-primary">palette</span>
+                        <div class="h-6 w-32 skeleton rounded"></div>
+                    </div>
+                    <div class="space-y-md">
+                        <div class="flex items-center justify-between p-sm border-b border-outline-variant/10">
+                            <div class="flex flex-col gap-1">
+                                <div class="h-4 w-24 skeleton rounded"></div>
+                                <div class="h-3 w-40 skeleton rounded opacity-70"></div>
+                            </div>
+                            <div class="w-12 h-6 skeleton rounded-full"></div>
+                        </div>
+                        <div class="flex flex-col gap-sm">
+                            <div class="h-4 w-32 skeleton rounded"></div>
+                            <div class="grid grid-cols-3 gap-sm">
+                                <div class="aspect-video skeleton rounded-lg border border-outline-variant/30"></div>
+                                <div class="aspect-video skeleton rounded-lg border border-outline-variant/30"></div>
+                                <div class="aspect-video skeleton rounded-lg border border-outline-variant/30"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Notifications Section -->
+                <section
+                    class="md:col-span-5 bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/10">
+                    <div class="flex items-center gap-sm mb-md">
+                        <span class="material-symbols-outlined text-secondary">notifications_active</span>
+                        <div class="h-6 w-40 skeleton rounded"></div>
+                    </div>
+                    <div class="space-y-sm">
+                        <div class="flex items-center justify-between p-xs">
+                            <div class="h-4 w-32 skeleton rounded"></div>
+                            <div class="w-8 h-4 skeleton rounded-full"></div>
+                        </div>
+                        <div class="flex items-center justify-between p-xs">
+                            <div class="h-4 w-40 skeleton rounded"></div>
+                            <div class="w-8 h-4 skeleton rounded-full"></div>
+                        </div>
+                        <div class="flex items-center justify-between p-xs">
+                            <div class="h-4 w-28 skeleton rounded"></div>
+                            <div class="w-8 h-4 skeleton rounded-full"></div>
+                        </div>
+                        <div class="flex items-center justify-between p-xs">
+                            <div class="h-4 w-36 skeleton rounded"></div>
+                            <div class="w-8 h-4 skeleton rounded-full"></div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Security & Connected Apps -->
+                <section class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-lg">
+                    <!-- Security Card -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/10">
+                        <div class="flex items-center gap-sm mb-md">
+                            <span class="material-symbols-outlined text-on-surface-variant">lock</span>
+                            <div class="h-6 w-24 skeleton rounded"></div>
+                        </div>
+                        <div class="space-y-md">
+                            <div class="h-12 w-full skeleton rounded-lg"></div>
+                            <div class="h-12 w-full skeleton rounded-lg"></div>
+                            <div class="h-10 w-32 skeleton rounded-lg mt-sm"></div>
+                        </div>
+                    </div>
+                    <!-- Connected Apps Card -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/10">
+                        <div class="flex items-center justify-between mb-md">
+                            <div class="flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-on-surface-variant">link</span>
+                                <div class="h-6 w-36 skeleton rounded"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-sm">
+                            <div class="flex items-center justify-between bg-surface-container-low p-sm rounded-lg">
+                                <div class="flex items-center gap-sm">
+                                    <div class="w-8 h-8 skeleton rounded"></div>
+                                    <div class="h-4 w-20 skeleton rounded"></div>
+                                </div>
+                                <div class="h-6 w-16 skeleton rounded-full"></div>
+                            </div>
+                            <div class="flex items-center justify-between bg-surface-container-low p-sm rounded-lg">
+                                <div class="flex items-center gap-sm">
+                                    <div class="w-8 h-8 skeleton rounded"></div>
+                                    <div class="h-4 w-24 skeleton rounded"></div>
+                                </div>
+                                <div class="h-6 w-16 skeleton rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Danger Zone -->
+                <section class="md:col-span-12 border-t border-error/20 pt-lg mt-md">
+                    <div
+                        class="bg-error-container/20 p-lg rounded-xl border border-error/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-md">
+                        <div class="flex flex-col gap-1">
+                            <div class="h-5 w-48 skeleton rounded bg-error/20"></div>
+                            <div class="h-4 w-72 skeleton rounded bg-error/10"></div>
+                        </div>
+                        <div class="h-12 w-40 skeleton rounded-lg bg-error/30"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-1px_10px_rgba(0,0,0,0.05)] flex justify-around items-center py-sm z-50">
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px] font-label-sm">Home</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="text-[10px] font-label-sm">Create</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-primary" href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+            <span class="text-[10px] font-label-sm font-bold">Settings</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">person</span>
+            <span class="text-[10px] font-label-sm">Profile</span>
+        </a>
+    </nav>
+    <script>
+        // Simulate loading transition (optional for demonstration)
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Skeleton state active...');
+            // In a real app, this is where data fetching logic would reside
+        });
+
+        // Simple interactivity for navigation tabs (even in skeleton state)
+        const navLinks = document.querySelectorAll('aside nav > div');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(l => {
+                    l.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                    l.classList.add('hover:bg-surface-container-high');
+                });
+                link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                link.classList.remove('hover:bg-surface-container-high');
+            });
+        });
+    </script>
+</body>
+
+</html>

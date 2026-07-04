@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login | Luminous AI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#dad7ff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-error-container": "#93000a",
+                        "secondary": "#712ae2",
+                        "on-tertiary-fixed": "#001f26",
+                        "primary-container": "#4f46e5",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed": "#eaddff",
+                        "on-surface-variant": "#464555",
+                        "outline-variant": "#c7c4d8",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "surface-dim": "#d9dadb",
+                        "secondary-container": "#8a4cfc",
+                        "primary": "#3525cd",
+                        "on-background": "#191c1d",
+                        "surface": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "outline": "#777587",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-container": "#fffbff",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "tertiary-container": "#006a7c",
+                        "tertiary": "#00505f",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-fixed": "#acedff",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-tint": "#4d44e3",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#93e8ff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed": "#25005a",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#3323cc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "1rem",
+                        "xs": "0.5rem",
+                        "lg": "2.5rem",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xl": "4rem",
+                        "md": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .mesh-gradient-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .mesh-gradient-2 {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(113, 42, 226, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .input-focus-glow:focus-within {
+            box-shadow: 0 0 0 4px rgba(79, 70, 225, 0.1);
+        }
+
+        /* Subtle interaction for buttons */
+        .btn-hover-effect:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+
+        .btn-hover-effect:active {
+            transform: translateY(0px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-sm selection:bg-primary-container selection:text-white">
+    <!-- Decorative Mesh Gradients -->
+    <div class="mesh-gradient-1"></div>
+    <div class="mesh-gradient-2"></div>
+    <main class="w-full max-w-[480px] z-10">
+        <!-- Glassmorphism Login Card -->
+        <div class="glass-card rounded-[16px] p-lg md:p-xl flex flex-col gap-lg">
+            <!-- Brand & Header -->
+            <header class="text-center flex flex-col items-center gap-xs">
+                <div class="flex items-center gap-xs mb-xs">
+                    <span class="material-symbols-outlined text-primary text-[32px]"
+                        style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    <h1 class="font-display text-headline-md font-bold text-primary tracking-tight">Luminous AI</h1>
+                </div>
+                <h2 class="font-headline-md text-headline-md text-on-surface">Welcome Back</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Enter your details to access your dashboard
+                </p>
+            </header>
+            <!-- Login Form -->
+            <form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+                <!-- Email Field -->
+                <div class="flex flex-col gap-xs">
+                    <label class="font-label-md text-label-md text-on-surface-variant ml-1" for="email">Email
+                        Address</label>
+                    <div class="relative group input-focus-glow rounded-xl transition-all duration-200">
+                        <span
+                            class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+                        <input
+                            class="w-full pl-[48px] pr-md py-md bg-surface-container-lowest border-outline-variant focus:border-primary rounded-xl text-on-surface font-body-md outline-none transition-all duration-200 placeholder:text-outline-variant"
+                            id="email" placeholder="name@company.com" type="email" />
+                    </div>
+                </div>
+                <!-- Password Field (With Validation Error Example) -->
+                <div class="flex flex-col gap-xs">
+                    <label class="font-label-md text-label-md text-on-surface-variant ml-1"
+                        for="password">Password</label>
+                    <div class="relative group rounded-xl transition-all duration-200 border border-error bg-surface-container-lowest input-focus-glow"
+                        style="box-shadow: 0 0 0 4px rgba(186, 26, 26, 0.05);">
+                        <span
+                            class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-error">lock</span>
+                        <input
+                            class="w-full pl-[48px] pr-[48px] py-md bg-transparent border-none focus:ring-0 rounded-xl text-on-surface font-body-md outline-none"
+                            id="password" type="password" value="••••••••" />
+                        <button
+                            class="absolute right-md top-1/2 -translate-y-1/2 text-outline-variant hover:text-on-surface transition-colors"
+                            type="button">
+                            <span class="material-symbols-outlined" id="password-toggle">visibility</span>
+                        </button>
+                    </div>
+                    <p class="text-error font-label-sm text-label-sm flex items-center gap-xs mt-1 ml-1">
+                        <span class="material-symbols-outlined text-[14px]">error</span>
+                        Invalid password. Please try again.
+                    </p>
+                </div>
+                <!-- Options Row -->
+                <div class="flex items-center justify-between mt-xs">
+                    <label class="flex items-center gap-xs cursor-pointer group">
+                        <input
+                            class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all cursor-pointer"
+                            type="checkbox" />
+                        <span
+                            class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-surface transition-colors">Remember
+                            me</span>
+                    </label>
+                    <a class="font-label-md text-label-md text-primary font-semibold hover:underline underline-offset-4 decoration-primary/30"
+                        href="#">Forgot Password?</a>
+                </div>
+                <!-- Login Action -->
+                <button
+                    class="w-full bg-primary text-on-primary py-md rounded-xl font-label-md text-label-md font-bold shadow-lg shadow-primary/20 transition-all duration-200 btn-hover-effect mt-sm"
+                    type="submit">
+                    Login
+                </button>
+                <!-- Separator -->
+                <div class="flex items-center gap-md my-xs">
+                    <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">or continue
+                        with</span>
+                    <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+                </div>
+                <!-- Social Logins -->
+                <div class="grid grid-cols-2 gap-md">
+                    <button
+                        class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-xl font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all duration-200 group"
+                        type="button">
+                        <img class="w-5 h-5 opacity-80 group-hover:opacity-100"
+                            data-alt="The Google logo icon, colorful and crisp, placed in a high-fidelity minimalist UI environment for professional SaaS authentication."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg4JowLZ2ydEzD20i0l7TVOfcikkWBm8JkROfOJvmdAbhb-saWQh2D4M7S-REPqBsUHYmKmCe_fMytSgmneycMoZDDBP3OE9OY7OFA4kJq0Qa3W8oNlZMKWa1iEk2bxJyoPif1G02ndOX0LcgtIEmSNFm8UIUKFIX5c3jtrJYmGYH4avy2xEVnzlYFcZAIpuWzxjMDDm1Ip8eL6QUFOia2y8OquWgXLoxlaFWOwoy5YicTzeWL4Ha0gg" />
+                        Google
+                    </button>
+                    <button
+                        class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-xl font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all duration-200 group"
+                        type="button">
+                        <span
+                            class="material-symbols-outlined text-[20px] text-on-surface group-hover:text-primary transition-colors">terminal</span>
+                        GitHub
+                    </button>
+                </div>
+            </form>
+            <!-- Footer Link -->
+            <footer class="text-center pt-md border-t border-outline-variant/20">
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                    Don't have an account?
+                    <a class="text-primary font-semibold hover:underline underline-offset-4 decoration-primary/30"
+                        href="#">Sign Up</a>
+                </p>
+            </footer>
+        </div>
+        <!-- Subtle Legal Disclaimer -->
+        <div class="mt-xl text-center">
+            <p class="font-label-sm text-label-sm text-outline">
+                © 2024 Luminous AI. All rights reserved.
+                <br class="md:hidden" />
+                <span class="mx-xs hidden md:inline">•</span>
+                <a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+                <span class="mx-xs">•</span>
+                <a class="hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+            </p>
+        </div>
+    </main>
+    <!-- Micro-interactions Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('password-toggle');
+            const passwordInput = document.getElementById('password');
+            let isVisible = false;
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', () => {
+                    isVisible = !isVisible;
+                    passwordInput.type = isVisible ? 'text' : 'password';
+                    toggleBtn.textContent = isVisible ? 'visibility_off' : 'visibility';
+                });
+            }
+
+            // Simple entrance animation
+            const card = document.querySelector('.glass-card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                card.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0px)';
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>

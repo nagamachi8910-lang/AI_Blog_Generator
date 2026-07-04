@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Blogs - AI Blog Generator</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols Outlined -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#dad7ff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-bright": "#f8f9fa",
+                        "tertiary-container": "#006a7c",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "tertiary": "#00505f",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary-fixed": "#001f26",
+                        "background": "#f8f9fa",
+                        "secondary-container": "#8a4cfc",
+                        "outline": "#777587",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-dim": "#d9dadb",
+                        "primary-container": "#4f46e5",
+                        "primary-fixed": "#e2dfff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#3525cd",
+                        "tertiary-fixed": "#acedff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "surface-container": "#edeeef",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "outline-variant": "#c7c4d8",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "inverse-primary": "#c3c0ff",
+                        "surface": "#f8f9fa",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary-fixed": "#25005a",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary": "#712ae2",
+                        "on-secondary-container": "#fffbff",
+                        "on-surface-variant": "#464555",
+                        "on-surface": "#191c1d",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "base": "4px",
+                        "sm": "1rem",
+                        "gutter": "24px",
+                        "md": "1.5rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "xl": "4rem"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(78, 70, 229, 0.15);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md">
+    <div class="relative flex min-h-screen w-full flex-col bg-[#f9f8fb] group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- TopNavBar Shared Component -->
+            <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+                    <header
+                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8e8f3] px-4 md:px-10 py-3">
+                        <div class="flex items-center gap-4 text-[#0f0e1b]">
+                            <div class="size-6 text-primary">
+                                <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z"
+                                        fill="currentColor" fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-[#0f0e1b] text-lg font-bold leading-tight tracking-[-0.015em]">AI Blog
+                                Generator</h2>
+                        </div>
+                        <div class="flex flex-1 justify-end gap-4 md:gap-8">
+                            <div class="hidden lg:flex items-center gap-9">
+                                <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
+                                    href="#">Dashboard</a>
+                                <a class="text-primary text-sm font-bold leading-normal" href="#">My Blogs</a>
+                                <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
+                                    href="#">Templates</a>
+                                <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
+                                    href="#">Settings</a>
+                            </div>
+                            <button
+                                class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-on-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-container transition-all">
+                                <span class="truncate">Create New Blog</span>
+                            </button>
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-outline-variant"
+                                data-alt="A professional user profile portrait in a minimalist studio setting with soft indigo backlighting, representing a tech-savvy content creator."
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzHCCXyVFFcLH9tokqcrHLyoCEVJ_JLqyQeanXbSvvuoCbGLmbfyCLswlpNLlA1a1i8xG1tgYoPD9i-E2nNvTw9dOMpbtm3v_RUYlS5vCRPCdKF_QFTTAemsZkiGrtksb7vfvkRJz0y5FacqvXoD43PF-y0uTIFObjxVuntKKuTLOBdUE2EoZKgdDE9-GR8mCvOSMmcMXMGlhwVBgPl-vHpMtK-akueTcbWheNPPnu6te9VYmKOO5Lbg");'>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Page Header & Search Section -->
+                    <div class="flex flex-wrap justify-between items-end gap-3 p-4 mt-6">
+                        <div class="flex min-w-72 flex-col gap-1">
+                            <h1 class="text-on-surface text-4xl font-black leading-tight tracking-[-0.033em]">My Blogs
+                            </h1>
+                            <p class="text-on-surface-variant text-base font-normal leading-normal">Manage, refine, and
+                                publish your AI-assisted content library.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-4 py-6">
+                        <!-- Search Bar -->
+                        <div class="md:col-span-6 lg:col-span-7">
+                            <label class="flex flex-col w-full h-12">
+                                <div
+                                    class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm border border-outline-variant bg-surface-container-lowest focus-within:border-primary transition-all">
+                                    <div class="text-on-surface-variant flex items-center justify-center pl-4"
+                                        data-icon="search">
+                                        <span class="material-symbols-outlined">search</span>
+                                    </div>
+                                    <input
+                                        class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 placeholder:text-outline px-4 text-base font-normal"
+                                        placeholder="Search your articles..." value="" />
+                                </div>
+                            </label>
+                        </div>
+                        <!-- Filters -->
+                        <div class="md:col-span-6 lg:col-span-5 flex gap-3">
+                            <div class="flex-1">
+                                <select
+                                    class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-4 text-sm font-medium text-on-surface focus:ring-primary focus:border-primary">
+                                    <option>Status: All</option>
+                                    <option>Published</option>
+                                    <option>Draft</option>
+                                    <option>Scheduled</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <select
+                                    class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-4 text-sm font-medium text-on-surface focus:ring-primary focus:border-primary">
+                                    <option>Sort: Newest</option>
+                                    <option>Oldest</option>
+                                    <option>A-Z</option>
+                                    <option>Reading Time</option>
+                                </select>
+                            </div>
+                            <!-- View Toggle -->
+                            <div class="flex bg-surface-container-high p-1 rounded-lg h-12 shrink-0">
+                                <button class="px-3 bg-surface-container-lowest shadow-sm rounded-md text-primary"
+                                    title="Grid View">
+                                    <span class="material-symbols-outlined">grid_view</span>
+                                </button>
+                                <button class="px-3 text-on-surface-variant hover:text-primary transition-colors"
+                                    title="List View">
+                                    <span class="material-symbols-outlined">view_list</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+                        <!-- Card 1 -->
+                        <article
+                            class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover">
+                            <div class="relative aspect-video w-full overflow-hidden">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    data-alt="A futuristic neural network visualization with flowing data streams and glowing indigo connections, representing deep learning and artificial intelligence in a high-tech laboratory setting."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAErU2PZE3zkKDFdMM24S3vU8j6lPuoMkeLio5uZnhAbiy55Ef_XHvD6C-u4bdgAPBlKet5L1QPq9x-2FP70oMtZ8PGZdbl8NCBXWDTyZd2irVU8xBJc5pl0N7cUKr2Q-FPIIswQtd-7FhBIzP6jvTXRI2bv0JbphfmNhiNBSEG4YVrhJj1guWfWGuIr-LDnlrB4Q1lJGZMY_3ScZrTmxlHo6bonqaF_eUCBvK6LM_uuF_NcLN0BN4z_w')">
+                                </div>
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-primary text-on-primary text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md">Published</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col p-5 grow">
+                                <div class="flex items-center gap-2 text-on-surface-variant text-xs mb-2">
+                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    <span>Oct 24, 2023</span>
+                                    <span class="mx-1">•</span>
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    <span>6 min read</span>
+                                </div>
+                                <h3 class="text-on-surface font-bold text-lg leading-snug mb-4 line-clamp-2">The Future
+                                    of Generative AI in Creative Writing</h3>
+                                <div
+                                    class="mt-auto flex items-center justify-between pt-4 border-t border-surface-container-high">
+                                    <button class="text-primary font-bold text-sm hover:underline">Open</button>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Duplicate">
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-error-container hover:text-error rounded-lg text-on-surface-variant transition-colors"
+                                            title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Card 2 -->
+                        <article
+                            class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover">
+                            <div class="relative aspect-video w-full overflow-hidden">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    data-alt="A minimalist architectural workspace with clean lines, featuring a holographic interface floating over a sleek desk. The scene is illuminated by soft, natural morning light with deep purple and blue accents."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCna9bSHAjxy-yi4zgG4BVxbeXKRprPfhgUWSUKldoxyZa-SYX-wCnH2s4w7-ZcYT61dsw0UQL3BBlWbkcetPIQtmNGiaFsdFxCVXb3_m-APnFTKo6G4uE3NU90M-t1829cXnLqysrYHY_m5rgEi67IbE4q0bKOU2JdOiGip4pNlNW0bTc6R2qPMmyO64NZLRAwPrnNORvxUYhypjg8bvdVcPfsxAxxJKUmWlxZBfoxUWhk2E-HZKso0w')">
+                                </div>
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-surface-variant text-on-surface-variant text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md">Draft</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col p-5 grow">
+                                <div class="flex items-center gap-2 text-on-surface-variant text-xs mb-2">
+                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    <span>Oct 22, 2023</span>
+                                    <span class="mx-1">•</span>
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    <span>4 min read</span>
+                                </div>
+                                <h3 class="text-on-surface font-bold text-lg leading-snug mb-4 line-clamp-2">Optimizing
+                                    SEO for Machine-Generated Content</h3>
+                                <div
+                                    class="mt-auto flex items-center justify-between pt-4 border-t border-surface-container-high">
+                                    <button class="text-primary font-bold text-sm hover:underline">Open</button>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Duplicate">
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-error-container hover:text-error rounded-lg text-on-surface-variant transition-colors"
+                                            title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Card 3 -->
+                        <article
+                            class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover">
+                            <div class="relative aspect-video w-full overflow-hidden">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    data-alt="An abstract visualization of digital privacy, showing intricate layers of crystalline structures and glowing shields in deep indigo and violet tones, with cinematic lighting and sharp geometric reflections."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrus4f_d-AoKNl70tPkBThkz76vysuk9VZ2j2jzs-GQPgw8kIY83CE3b0RmnfB3cuLLHly7XlIG9bgKTDeFe2PWEiVXzciUbl3qDX2L9TkiWVI6RYmJNHei5_zPfbCSmN5COGtS2UFZ-lPquQsRQw3NTAoilxWNFU2oeKKQi-DBCiMnBC3IKFGiJptgDjKjUlTEFNx9E5r2OmM5S9AQWlQcbIa8WasckUnJLgB-jSvKwAtOXIEmEuVZw')">
+                                </div>
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-primary text-on-primary text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md">Published</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col p-5 grow">
+                                <div class="flex items-center gap-2 text-on-surface-variant text-xs mb-2">
+                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    <span>Oct 18, 2023</span>
+                                    <span class="mx-1">•</span>
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    <span>8 min read</span>
+                                </div>
+                                <h3 class="text-on-surface font-bold text-lg leading-snug mb-4 line-clamp-2">Ethics and
+                                    Transparency in AI Content Platforms</h3>
+                                <div
+                                    class="mt-auto flex items-center justify-between pt-4 border-t border-surface-container-high">
+                                    <button class="text-primary font-bold text-sm hover:underline">Open</button>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Duplicate">
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-error-container hover:text-error rounded-lg text-on-surface-variant transition-colors"
+                                            title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Card 4 -->
+                        <article
+                            class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover">
+                            <div class="relative aspect-video w-full overflow-hidden">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    data-alt="A vibrant, multi-colored digital brain made of liquid light and fiber optic strands, pulsing with energy against a clean white background, symbolizing the fusion of human creativity and computer logic."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIgEjkfOk17qotFF0hd4bk4Sk-1HCBwNncY7FnsPuOEZ34TYJDVP7HFj2NJOp62kMhYjwCsTyJ9ykhbILyy_oWtMstbzQ1VHLWcNE60ThOYoDOJZYoNfWKBVzxUypmiLch1-e3Vgo-2icNDuKO1vCkCobQKbZmWj6WiAur6sA3uuatRiaAzCWnA9pS2UoCgzZ60UGZ8tRQPGy4zXEYXLmM1ZV19VbGtEcoChhmkDg0iZGMwmiIg-rADw')">
+                                </div>
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-primary text-on-primary text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md">Published</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col p-5 grow">
+                                <div class="flex items-center gap-2 text-on-surface-variant text-xs mb-2">
+                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    <span>Oct 15, 2023</span>
+                                    <span class="mx-1">•</span>
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    <span>5 min read</span>
+                                </div>
+                                <h3 class="text-on-surface font-bold text-lg leading-snug mb-4 line-clamp-2">How LLMs
+                                    are Revolutionizing Technical Documentation</h3>
+                                <div
+                                    class="mt-auto flex items-center justify-between pt-4 border-t border-surface-container-high">
+                                    <button class="text-primary font-bold text-sm hover:underline">Open</button>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Duplicate">
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-error-container hover:text-error rounded-lg text-on-surface-variant transition-colors"
+                                            title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Card 5 (Draft) -->
+                        <article
+                            class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover">
+                            <div class="relative aspect-video w-full overflow-hidden">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    data-alt="An elegant 3D composition of paper scrolls and digital tablet screens floating in a bright, airy gallery, representing the transition from traditional media to AI-powered digital storytelling in high-key lighting."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5rIYMrv46M9TmsmvK5BHuderjkZKFg1oN_V2pesYeV0mz03irTY5CkK79qUqiKBWaishadQs1W2Yq337csxAc2965OWT581bvKsxC6AgycSbE-PWCqD4gZEKx9wKxsOJ7rzpMing1ybw-E-JzrMHJ9IDeCJHAPZzpWhBriA3xemwAFjn4yVW9DY2s99h6hYUtftmPDFzc-uobwhthObLSQzSnqXODihbVcCZwOwyQxTssFhB20Zkp_Q')">
+                                </div>
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-surface-variant text-on-surface-variant text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md">Draft</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col p-5 grow">
+                                <div class="flex items-center gap-2 text-on-surface-variant text-xs mb-2">
+                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    <span>Oct 12, 2023</span>
+                                    <span class="mx-1">•</span>
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    <span>12 min read</span>
+                                </div>
+                                <h3 class="text-on-surface font-bold text-lg leading-snug mb-4 line-clamp-2">Complete
+                                    Guide to Fine-Tuning Your AI Tone of Voice</h3>
+                                <div
+                                    class="mt-auto flex items-center justify-between pt-4 border-t border-surface-container-high">
+                                    <button class="text-primary font-bold text-sm hover:underline">Open</button>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors"
+                                            title="Duplicate">
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        </button>
+                                        <button
+                                            class="p-2 hover:bg-error-container hover:text-error rounded-lg text-on-surface-variant transition-colors"
+                                            title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- New Blog Placeholder/Empty Card -->
+                        <button
+                            class="flex flex-col items-center justify-center bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl p-8 hover:border-primary hover:bg-surface-container transition-all group min-h-[340px]">
+                            <div
+                                class="size-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-4">
+                                <span class="material-symbols-outlined text-4xl">add</span>
+                            </div>
+                            <p class="text-on-surface font-bold text-lg">Create New Blog</p>
+                            <p class="text-on-surface-variant text-sm text-center mt-2 max-w-[200px]">Start generating
+                                your next viral article with AI assistance.</p>
+                        </button>
+                    </div>
+                    <!-- Pagination/Load More -->
+                    <div class="flex flex-col items-center justify-center py-12 gap-4">
+                        <p class="text-on-surface-variant text-sm">Showing 5 of 24 blogs</p>
+                        <button
+                            class="flex items-center gap-2 px-6 py-2 border border-outline-variant rounded-full text-on-surface font-medium hover:bg-surface-container-high transition-colors">
+                            <span>Load More Articles</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                    </div>
+                    <!-- Footer -->
+                    <footer class="mt-auto border-t border-surface-container-high py-10 px-4">
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                            <div class="flex items-center gap-2 text-on-surface-variant">
+                                <div class="size-5 opacity-50">
+                                    <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                        <path clip-rule="evenodd"
+                                            d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z"
+                                            fill="currentColor" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">© 2023 AI Blog Generator. All rights reserved.</span>
+                            </div>
+                            <div class="flex gap-6 text-sm text-on-surface-variant">
+                                <a class="hover:text-primary" href="#">Terms of Service</a>
+                                <a class="hover:text-primary" href="#">Privacy Policy</a>
+                                <a class="hover:text-primary" href="#">Help Center</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Micro-interactions
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Subtle zoom on images could be added here via CSS classes
+            });
+        });
+
+        // Handle view toggle state (Simple Visual Only)
+        const toggleButtons = document.querySelectorAll('.bg-surface-container-high button');
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toggleButtons.forEach(b => {
+                    b.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                    b.classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                btn.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body>
+
+</html>

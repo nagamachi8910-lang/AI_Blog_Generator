@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>500 Internal Server Error | Luminous Editorial</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c7c4d8",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#4f46e5",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary": "#712ae2",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "primary": "#3525cd",
+                        "tertiary": "#00505f",
+                        "surface": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "primary-fixed": "#e2dfff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-background": "#191c1d",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-tertiary-fixed": "#001f26",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#acedff",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-dim": "#d9dadb",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777587",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464555",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#93e8ff",
+                        "tertiary-container": "#006a7c",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "md": "1.5rem",
+                        "gutter": "24px",
+                        "xs": "0.5rem",
+                        "xl": "4rem",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .shadow-level-1 {
+            shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 10px 15px -5px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="bg-surface sticky top-0 z-50 shadow-sm">
+        <div class="flex justify-between items-center w-full px-md md:px-xl py-sm max-w-container-max mx-auto">
+            <div class="flex items-center gap-md">
+                <span class="text-headline-md font-display font-bold text-primary">Luminous Editorial</span>
+                <div class="hidden md:flex items-center gap-md ml-lg">
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                        href="#">Dashboard</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                        href="#">Templates</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                        href="#">Drafts</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                        href="#">Settings</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-sm">
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full">help</button>
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full">notifications</button>
+                <button
+                    class="hidden md:block accent-gradient text-white px-md py-xs rounded-lg font-label-md hover:scale-105 transition-transform">Create
+                    New</button>
+                <div
+                    class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="Professional headshot of a creative editor in a minimalist setting with soft, natural lighting. The style is clean and modern, following the Luminous Editorial brand guidelines with a focus on professional clarity and sophisticated neutral tones."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr37bt7mAFjznNhdePbKO7K2HnNTKj7VnX6jzCRNKFZ_XkpHHLc-8PhaFAs7BEAeZZoHaD5tLo6-IGj1TtnH6twsrYTYFyRK6WxhBpuw1xOHF0b40ay4R8JF75ELFUiXFvmNNCqoYVadjLR-Ayn8xv8mFQXAOik7CilTc_A_7w01rmrMNmtdMaK4i4wPPWVmIDxhQcUBLWQlnbSIZbsa5RiUSjlqt3xU7MPEbH5_EljiXWkWFlIIYihg" />
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="flex-grow flex flex-col items-center justify-center relative px-sm py-xl overflow-hidden">
+        <!-- Subtle Ambient Background Decorations -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div class="max-w-3xl w-full text-center z-10 flex flex-col items-center">
+            <!-- Isometric Error Illustration Container -->
+            <div class="relative w-full max-w-md h-72 md:h-96 mb-lg flex items-center justify-center">
+                <div class="floating-anim relative z-20">
+                    <img class="w-full h-full object-contain"
+                        data-alt="A highly detailed 3D isometric illustration of a sleek, minimalist robot in the Luminous Editorial style. The robot is sitting cross-legged with a coffee mug, surrounded by floating holographic gears and digital tools that look slightly detached. The color palette features primary indigo, soft secondary purples, and clean whites against a high-key background. Lighting is soft and atmospheric, emphasizing premium quality and a calm technological aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzKxM4ZCqMEI8sdRefJ3KptGa4bOBpecZieG3-alVhsVG9-rCvkv6xuIEbhl0-NRO8GT76con4cC48YXrsWq1JLyaKdG8mcIgqI8tm4Xhkf5C81-G_rmbmKsiP_EWGm3QlAkA9ZAoh0qJYY-vKJcFRILNOaQQhnWgzzM2BJpl-18fm1mgux9PI-HF7CN9V3OTSr_pPUkPwgMPSuqqbBiaIWseTBOKh3FLJ7hICuLWaLh0XZ3SVJAW2UA" />
+                </div>
+                <!-- Atmospheric Particle/Gear Elements (Abstract) -->
+                <div class="absolute top-10 right-20 opacity-40 animate-spin" style="animation-duration: 8s;">
+                    <span class="material-symbols-outlined text-[48px] text-primary-fixed-dim">settings</span>
+                </div>
+                <div class="absolute bottom-10 left-10 opacity-30 animate-pulse">
+                    <span class="material-symbols-outlined text-[32px] text-secondary">car_repair</span>
+                </div>
+                <div class="absolute top-1/2 left-0 opacity-20 floating-anim" style="animation-delay: 1s;">
+                    <span class="material-symbols-outlined text-[40px] text-outline">architecture</span>
+                </div>
+            </div>
+            <!-- Error Messaging -->
+            <div class="space-y-md px-md">
+                <span
+                    class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-sm py-xs rounded-full inline-block mb-sm">Error
+                    500: System Hiccup</span>
+                <h1 class="font-display text-display text-on-surface leading-tight">Our AI is taking a coffee break</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">
+                    Something went wrong on our end. We're currently investigating the issue and should be back to
+                    normal shortly.
+                </p>
+            </div>
+            <!-- Action Buttons -->
+            <div class="mt-lg flex flex-col sm:flex-row items-center justify-center gap-md">
+                <button
+                    class="accent-gradient text-white font-label-md px-xl py-md rounded-xl hover:scale-[1.02] transition-all shadow-lg active:scale-95"
+                    onclick="window.location.reload()">
+                    Try Refreshing
+                </button>
+                <a class="font-label-md text-primary flex items-center gap-xs hover:gap-sm transition-all group"
+                    href="#">
+                    Check System Status
+                    <span
+                        class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+            </div>
+            <!-- Subtle Support Info -->
+            <div class="mt-xl pt-lg border-t border-outline-variant/30 w-full max-w-md">
+                <p class="font-label-sm text-label-sm text-outline">
+                    Still having issues? <a class="text-secondary hover:underline" href="#">Contact our technical
+                        team</a>
+                </p>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-outline-variant">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center w-full px-md md:px-xl py-lg max-w-container-max mx-auto gap-sm">
+            <div class="flex flex-col items-center md:items-start gap-xs">
+                <span class="font-display font-bold text-on-surface">Luminous Editorial</span>
+                <p class="font-body-md text-label-sm text-on-surface-variant">© 2024 Luminous Editorial. Powered by
+                    Advanced AI.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-md">
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Terms of Service</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Status</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Micro-interaction for refresh button glow effect
+        const refreshBtn = document.querySelector('button[onclick]');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('mouseover', () => {
+                refreshBtn.style.boxShadow = '0 0 20px rgba(53, 37, 205, 0.3)';
+            });
+            refreshBtn.addEventListener('mouseout', () => {
+                refreshBtn.style.boxShadow = 'none';
+            });
+        }
+
+        // Simulating the "Investigating" status with a console log for flavor
+        console.log("%c[System Monitor] 500 Internal Error detected. AI agents are currently troubleshooting. Status: Coffee Break.", "color: #3525cd; font-weight: bold;");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Future of Generative Synthesis | Aetherium AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind Config Verification -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#00505f",
+                        "on-background": "#191c1d",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary": "#3525cd",
+                        "tertiary-fixed": "#acedff",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-dim": "#d9dadb",
+                        "surface-tint": "#4d44e3",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container": "#edeeef",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary-fixed": "#eaddff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "secondary": "#712ae2",
+                        "on-primary-container": "#dad7ff",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-container": "#8a4cfc",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#4f46e5",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-surface-variant": "#464555",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-container": "#006a7c",
+                        "outline": "#777587",
+                        "background": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "2.5rem",
+                        "container-max": "1280px",
+                        "sm": "1rem",
+                        "base": "4px",
+                        "xl": "4rem",
+                        "md": "1.5rem",
+                        "xs": "0.5rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+
+        .glass-nav {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .prose-custom p {
+            margin-bottom: 1.5rem;
+            color: #464555;
+        }
+
+        .prose-custom h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #191c1d;
+        }
+
+        .toc-active {
+            color: #3525cd;
+            font-weight: 600;
+            border-left: 2px solid #3525cd;
+            padding-left: 0.75rem;
+        }
+
+        .selection-highlight::selection {
+            background: #e2dfff;
+            color: #0f0069;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background selection-highlight">
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 glass-nav shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
+        <div class="max-w-container-max mx-auto px-md h-20 flex items-center justify-between">
+            <div class="flex items-center gap-xs">
+                <span class="font-display text-headline-md font-bold tracking-tight text-primary">Aetherium AI</span>
+            </div>
+            <div class="hidden md:flex items-center gap-lg">
+                <a class="text-primary font-semibold border-b-2 border-primary pb-1 font-body-md text-body-md"
+                    href="#">Discover</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
+                    href="#">Case Studies</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
+                    href="#">Features</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
+                    href="#">Pricing</a>
+            </div>
+            <button
+                class="accent-gradient text-on-primary px-lg py-3 rounded-full font-label-md text-label-md hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-lg">
+                Get Started
+            </button>
+        </div>
+    </nav>
+    <!-- Floating Share Button -->
+    <div class="fixed bottom-10 right-10 z-40 hidden lg:flex flex-col gap-sm">
+        <button
+            class="w-12 h-12 bg-surface shadow-lg rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all border border-outline-variant/30">
+            <span class="material-symbols-outlined">share</span>
+        </button>
+        <button
+            class="w-12 h-12 bg-surface shadow-lg rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all border border-outline-variant/30">
+            <span class="material-symbols-outlined">bookmark</span>
+        </button>
+    </div>
+    <!-- Main Content Wrapper -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <header class="w-full h-[614px] relative overflow-hidden">
+            <img class="w-full h-full object-cover"
+                data-alt="A cinematic, high-resolution wide shot of a sleek robotic hand interacting with a glowing holographic interface in a sun-drenched, minimalist studio. Soft dust particles dance in the warm morning light. The color palette is dominated by airy whites, deep indigos, and soft lavenders, creating a serene and premium technological atmosphere."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjNjoJY8q3bfTdPJ8Ih8Fy1PXei7GbD1s95bZ7axTCZrq5haMVkqRs51Y6v9tdpzyu8KwIzTgQ5ZXYUNQ_0HmqYHH7R8k8lna1nJPsTuI0DB4qK064ZZ4nhjYlFV6MdQrLY_FTN7w6afuvTDanPf__470C1b4WUkoSDez9pGh_BcxQGDmsyDLX3_7R1oeQRbj83Q_kVr83NVDrYaX76dOZpXZRaHvjwTx33FRFkeXtcQqoMj_F9h573w" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+        </header>
+        <div
+            class="max-w-container-max mx-auto px-md -mt-32 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-lg pb-xl">
+            <!-- Left Sticky Sidebar (TOC) -->
+            <aside class="hidden lg:block lg:col-span-3">
+                <div
+                    class="sticky top-28 p-md rounded-xl bg-surface/50 backdrop-blur-sm border border-outline-variant/20">
+                    <h4 class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-md">Table of
+                        Contents</h4>
+                    <ul class="space-y-sm">
+                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all toc-active"
+                                href="#introduction">Introduction</a></li>
+                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
+                                href="#mechanics">The Mechanics of Synthesis</a></li>
+                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
+                                href="#data-viz">Comparative Efficiency</a></li>
+                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
+                                href="#ethics">Ethical Frameworks</a></li>
+                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
+                                href="#conclusion">Final Insights</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- Main Article Column -->
+            <article
+                class="lg:col-span-7 bg-surface-container-lowest p-md md:p-xl rounded-2xl shadow-[0px_1px_3px_rgba(0,0,0,0.05)] border border-outline-variant/20">
+                <!-- Article Header -->
+                <div class="mb-xl">
+                    <div class="flex items-center gap-xs mb-sm">
+                        <span
+                            class="bg-primary/10 text-primary px-sm py-1 rounded-full font-label-sm text-label-sm">Generative
+                            Intelligence</span>
+                        <span class="text-on-surface-variant text-label-sm">• 12 min read</span>
+                    </div>
+                    <h1 class="font-display text-display text-on-background mb-md leading-[1.1]">The Future of
+                        Generative Synthesis: A New Paradigm</h1>
+                    <div class="flex items-center justify-between py-md border-y border-outline-variant/30">
+                        <div class="flex items-center gap-sm">
+                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="A professional headshot of a woman with a confident smile, wearing minimalist glasses and a dark blazer. The background is a clean, softly blurred modern office interior with neutral tones and natural light. High-end editorial photography style."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdBkepovFu4XI75LkpAhPlNcyWCMMrbaF-n_IPQn7UwAxC9tLFjzCEkyhangE47EfW2SxegxEv1sw5tlhhkXkwUVnCAb0RET7OgTv9BTcItH2EElGUSUUJ3JiUiW5Uz9uaBOzrC6c6y0Em0a3v2qGexEkytKeCxj2WNwFox25GZXxN25Avyx41_oSZZA6-7Bi-raLlJxPSa0N2y8efbgDfFsY8AIwB5AiOJZMJpczbVAVbbGfjjqF4sg" />
+                            </div>
+                            <div>
+                                <p class="font-label-md text-label-md text-on-background">Dr. Elena Vance</p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Chief AI Architect • Oct
+                                    24, 2024</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-xs">
+                            <button
+                                class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant"><span
+                                    class="material-symbols-outlined">favorite</span></button>
+                            <button
+                                class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant"><span
+                                    class="material-symbols-outlined">share</span></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Article Body -->
+                <div class="prose-custom font-body-lg text-body-lg selection-highlight">
+                    <p class="first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left"
+                        id="introduction">
+                        Generative AI has transcended the initial novelty phase. We are now entering an era of
+                        "Synthesis," where the focus shifts from mere content generation to deep structural integration
+                        within professional workflows. This transition marks a fundamental change in how we perceive the
+                        relationship between human intuition and algorithmic precision.
+                    </p>
+                    <!-- Tip Callout -->
+                    <div class="my-lg p-md bg-tertiary-fixed/30 border-l-4 border-tertiary rounded-r-xl flex gap-md">
+                        <span class="material-symbols-outlined text-tertiary">lightbulb</span>
+                        <div>
+                            <p class="font-label-md text-label-md text-tertiary font-bold mb-1">Expert Tip</p>
+                            <p class="text-body-md font-body-md text-on-tertiary-fixed-variant m-0">Synthesis is most
+                                effective when user prompts focus on 'constraints' rather than 'outcomes'. Define the
+                                boundaries to unleash the model's creative logic.</p>
+                        </div>
+                    </div>
+                    <h2 id="mechanics">The Mechanics of Synthesis</h2>
+                    <p>
+                        To understand synthesis, we must look at the underlying transformers. Unlike earlier models that
+                        relied on rigid pattern matching, modern architectures utilize multi-layered attention
+                        mechanisms that simulate contextual awareness.
+                    </p>
+                    <!-- Code Block -->
+                    <div class="my-lg rounded-xl overflow-hidden bg-on-background shadow-lg">
+                        <div
+                            class="bg-surface-variant/10 px-md py-2 flex justify-between items-center border-b border-outline-variant/10">
+                            <span class="font-label-sm text-label-sm text-outline-variant">Aetherium_Engine.py</span>
+                            <button
+                                class="flex items-center gap-xs font-label-sm text-label-sm text-outline-variant hover:text-white transition-colors">
+                                <span class="material-symbols-outlined text-[16px]">content_copy</span> Copy
+                            </button>
+                        </div>
+                        <pre class="p-md text-primary-fixed-dim font-mono text-[14px] leading-relaxed"><code>def synthesize_context(prompt, constraints):
+    """
+    Core synthesis engine for Aetherium AI
+    """
+    attention_map = model.generate_attention(prompt)
+    filtered_output = apply_constraints(attention_map, constraints)
+    
+    return refined_synthesis(filtered_output)</code></pre>
+                    </div>
+                    <h2 id="data-viz">Comparative Efficiency</h2>
+                    <p>Our recent benchmarks show a significant reduction in hallucination rates when leveraging
+                        cross-domain synthesis models versus standard large language models.</p>
+                    <!-- Data Table -->
+                    <div class="my-lg overflow-hidden border border-outline-variant/30 rounded-xl">
+                        <table class="w-full text-left">
+                            <thead class="bg-surface-container-high">
+                                <tr>
+                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">MODEL
+                                        TYPE</th>
+                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">ACCURACY
+                                    </th>
+                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">LATENCY
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/20">
+                                <tr>
+                                    <td class="px-md py-4 font-body-md text-body-md">Standard LLM</td>
+                                    <td class="px-md py-4 font-body-md text-body-md">78.4%</td>
+                                    <td class="px-md py-4 font-body-md text-body-md">420ms</td>
+                                </tr>
+                                <tr class="bg-primary/5">
+                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">
+                                        Aetherium Synthesis</td>
+                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">94.2%
+                                    </td>
+                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">180ms
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-md py-4 font-body-md text-body-md">Hybrid Cluster</td>
+                                    <td class="px-md py-4 font-body-md text-body-md">86.1%</td>
+                                    <td class="px-md py-4 font-body-md text-body-md">550ms</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Warning Callout -->
+                    <div class="my-lg p-md bg-error-container/30 border-l-4 border-error rounded-r-xl flex gap-md">
+                        <span class="material-symbols-outlined text-error">warning</span>
+                        <div>
+                            <p class="font-label-md text-label-md text-error font-bold mb-1">Ethical Note</p>
+                            <p class="text-body-md font-body-md text-on-error-container m-0">Always verify generated
+                                data against primary sources during high-stakes decision making processes.</p>
+                        </div>
+                    </div>
+                    <h2 id="ethics">Ethical Frameworks</h2>
+                    <p>As we empower these models, the responsibility for ethical output remains a human prerogative.
+                        Aetherium AI implements a triple-layer safety check that prioritizes inclusivity and factual
+                        integrity above all else.</p>
+                    <figure class="my-lg">
+                        <img class="w-full rounded-2xl shadow-xl border border-outline-variant/10"
+                            data-alt="A highly detailed 3D isometric illustration of a human brain merged with glowing fiber optic circuits. The lighting is ethereal and soft, with a palette of deep indigos and brilliant cyan highlights. The composition is clean, centered, and set against a minimalist white background, conveying a high-tech premium medical or technological aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtg_Cwvk7l4H5nd87widzcW9dBE5zcJEBRS9tiYcw-llBjEQYunYbIItgAaWOfZq4h66RmIXbt2OXpPGg8bJQ3Gd1Y1iYzFHRyiU6w0UMfKlJxVFaw20Qg4FYOLkuD2i47cdJx50r1URO2Svlcl63K2MbWSIKcZAtQpDn-58MMVoTPoAmQhUEewYB8J8T0tdpjFz1fN9v9J31x2AZKhfSIlnYUlLMUpQD9EJM147wOZLXO8iUCI9pAJQ" />
+                        <figcaption
+                            class="mt-sm text-center font-label-sm text-label-sm text-on-surface-variant italic">Fig 1:
+                            Conceptual mapping of neural synthesis integration.</figcaption>
+                    </figure>
+                    <h2 id="conclusion">Final Insights</h2>
+                    <p>The journey towards total synthesis is ongoing. Our commitment to creating tools that amplify
+                        human potential without replacing the human spirit is what drives every line of code we write.
+                    </p>
+                </div>
+                <!-- FAQ Section -->
+                <section class="mt-xl pt-xl border-t border-outline-variant/30">
+                    <h3 class="font-headline-lg text-headline-lg mb-lg">Common Inquiries</h3>
+                    <div class="space-y-md">
+                        <details
+                            class="group p-md bg-surface-container rounded-xl border border-outline-variant/10 cursor-pointer transition-all hover:bg-surface-container-high">
+                            <summary class="flex justify-between items-center font-label-md text-label-md list-none">
+                                How does Aetherium handle proprietary data privacy?
+                                <span
+                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <p class="mt-md font-body-md text-body-md text-on-surface-variant">We utilize localized
+                                encryption and siloed data architectures to ensure that your proprietary information
+                                never enters the public training pool.</p>
+                        </details>
+                        <details
+                            class="group p-md bg-surface-container rounded-xl border border-outline-variant/10 cursor-pointer transition-all hover:bg-surface-container-high">
+                            <summary class="flex justify-between items-center font-label-md text-label-md list-none">
+                                Can I integrate this into my existing CMS?
+                                <span
+                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <p class="mt-md font-body-md text-body-md text-on-surface-variant">Yes, Aetherium provides a
+                                robust REST API and pre-built plugins for major platforms like Headless Wordpress and
+                                Contentful.</p>
+                        </details>
+                    </div>
+                </section>
+                <!-- References -->
+                <section class="mt-xl p-md bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+                    <h4 class="font-label-sm text-label-sm text-outline uppercase mb-md">References &amp; Further
+                        Reading</h4>
+                    <ul class="space-y-xs list-decimal pl-md font-label-md text-label-md text-on-surface-variant">
+                        <li>Vance, E. (2024). <i>The Neural Bridge: Transformers in Synthesis</i>. AI Journal.</li>
+                        <li>Global Tech Council. (2023). <i>Ethical Guidelines for Generative Models</i>.</li>
+                        <li>Aetherium Engineering Documentation, v4.2.1.</li>
+                    </ul>
+                </section>
+            </article>
+            <!-- Right Sidebar (Metadata/Ads/Share) -->
+            <aside class="hidden lg:block lg:col-span-2">
+                <div class="sticky top-28 space-y-lg">
+                    <div class="p-md rounded-xl bg-primary/5 border border-primary/10">
+                        <h5 class="font-label-sm text-label-sm text-primary mb-sm">PROMOTED</h5>
+                        <p class="font-body-md text-[14px] text-on-surface mb-md">Unlock the full power of Synthesis
+                            with Aetherium Pro.</p>
+                        <button
+                            class="w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">Upgrade
+                            Now</button>
+                    </div>
+                    <div class="flex flex-col gap-sm">
+                        <p class="font-label-sm text-label-sm text-outline uppercase">Share Article</p>
+                        <div class="flex gap-xs">
+                            <a class="w-10 h-10 rounded-full bg-surface border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                                href="#"><span class="material-symbols-outlined text-[20px]">public</span></a>
+                            <a class="w-10 h-10 rounded-full bg-surface border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                                href="#"><span class="material-symbols-outlined text-[20px]">chat</span></a>
+                            <a class="w-10 h-10 rounded-full bg-surface border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                                href="#"><span class="material-symbols-outlined text-[20px]">mail</span></a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-xl mt-xl bg-surface-container-lowest border-t border-outline-variant/30">
+        <div class="max-w-container-max mx-auto px-md grid grid-cols-1 md:grid-cols-4 gap-lg">
+            <div class="col-span-1 md:col-span-1">
+                <span class="font-display text-headline-md font-bold text-on-surface">Aetherium AI</span>
+                <p class="mt-md font-label-md text-label-md text-on-surface-variant leading-relaxed">
+                    © 2024 Aetherium AI. Crafted for the generative age.
+                </p>
+            </div>
+            <div class="col-span-1">
+                <h6 class="font-label-md text-label-md text-primary font-bold mb-md">Product</h6>
+                <ul class="space-y-sm">
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Features</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Pricing</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">API Documentation</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Changelog</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h6 class="font-label-md text-label-md text-primary font-bold mb-md">Company</h6>
+                <ul class="space-y-sm">
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Privacy Policy</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Terms of Service</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Press Kit</a></li>
+                    <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                            href="#">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h6 class="font-label-md text-label-md text-primary font-bold mb-md">Newsletter</h6>
+                <p class="font-label-md text-label-md text-on-surface-variant mb-md">Stay updated with our latest AI
+                    breakthroughs.</p>
+                <div class="flex gap-xs">
+                    <input
+                        class="flex-1 bg-surface-container border-none rounded-lg px-md font-body-md text-body-md focus:ring-2 focus:ring-primary"
+                        placeholder="Your email" type="email" />
+                    <button
+                        class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md transition-all hover:opacity-90">Join</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Simple Intersection Observer for Scroll Spy
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('aside ul li a').forEach(link => {
+                        link.classList.remove('toc-active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('toc-active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('h2').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Add dummy active to first item on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const firstHeader = document.querySelector('h2');
+            if (firstHeader) observer.observe(firstHeader);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Luminous AI - Notification System</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#eaddff",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-container": "#dad7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-bright": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#edeeef",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#006a7c",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed": "#25005a",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#777587",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#acedff",
+                        "surface-container-high": "#e7e8e9",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#001f26",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c7c4d8",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e2dfff",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#e1e3e4",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "on-surface-variant": "#464555",
+                        "tertiary": "#00505f",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "background": "#f8f9fa",
+                        "primary-container": "#4f46e5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary": "#712ae2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "1rem",
+                        "base": "4px",
+                        "xl": "4rem",
+                        "xs": "0.5rem",
+                        "gutter": "24px",
+                        "md": "1.5rem",
+                        "lg": "2.5rem",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-animate {
+            animation: shrink 3s linear forwards;
+        }
+
+        @keyframes shrink {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #712ae2 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background font-body-md text-on-surface overflow-x-hidden min-h-screen">
+    <!-- Top Navigation Shell -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-container-max mx-auto bg-surface/60 backdrop-blur-md">
+        <div class="font-display text-headline-md font-bold text-primary tracking-tight">Luminous AI</div>
+        <nav class="hidden md:flex gap-lg items-center">
+            <a class="font-label-md text-label-md text-primary font-semibold border-b-2 border-primary"
+                href="#">Product</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Solutions</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Pricing</a>
+        </nav>
+        <div class="flex items-center gap-sm">
+            <button
+                class="font-label-md text-label-md text-on-surface-variant hover:opacity-70 transition-opacity">Support</button>
+            <button
+                class="accent-gradient text-white px-md py-xs rounded-lg font-label-md text-label-md shadow-lg hover:scale-105 active:scale-95 transition-transform">Sign
+                Up</button>
+        </div>
+    </header>
+    <main class="pt-[120px] px-sm md:px-lg max-w-container-max mx-auto">
+        <!-- Hero Intro -->
+        <section class="mb-xl text-center md:text-left">
+            <h1 class="font-display text-display text-on-surface mb-sm">Toast Notification Gallery</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                A showcase of reusable feedback states for the AI Blog Generator platform. Designed with premium
+                glassmorphism and motion-ready aesthetics.
+            </p>
+            <!-- Interaction Area -->
+            <div class="mt-lg flex flex-wrap justify-center md:justify-start gap-md">
+                <button
+                    class="px-md py-xs border border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-primary/10 transition-all flex items-center gap-xs"
+                    onclick="triggerToast('success')">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span> Trigger Success
+                </button>
+                <button
+                    class="px-md py-xs border border-error text-error rounded-xl font-label-md text-label-md hover:bg-error/10 transition-all flex items-center gap-xs"
+                    onclick="triggerToast('error')">
+                    <span class="material-symbols-outlined text-[18px]">error</span> Trigger Error
+                </button>
+                <button
+                    class="px-md py-xs border border-secondary text-secondary rounded-xl font-label-md text-label-md hover:bg-secondary/10 transition-all flex items-center gap-xs"
+                    onclick="triggerToast('warning')">
+                    <span class="material-symbols-outlined text-[18px]">warning</span> Trigger Warning
+                </button>
+                <button
+                    class="px-md py-xs border border-tertiary text-tertiary rounded-xl font-label-md text-label-md hover:bg-tertiary/10 transition-all flex items-center gap-xs"
+                    onclick="triggerToast('info')">
+                    <span class="material-symbols-outlined text-[18px]">info</span> Trigger Info
+                </button>
+            </div>
+        </section>
+        <!-- Gallery Section with Animated Background Background -->
+        <section class="relative min-h-[600px] rounded-[32px] overflow-hidden p-md md:p-xl mb-xl">
+
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-lg max-w-4xl mx-auto">
+                <!-- Success Toast -->
+                <div
+                    class="glass p-md rounded-xl flex flex-col shadow-[0px_10px_15px_-5px_rgba(0,0,0,0.03)] border-l-4 border-l-green-500 relative overflow-hidden group">
+                    <div class="flex items-start gap-sm">
+                        <div class="bg-green-100 text-green-600 p-base rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-headline-md text-label-md text-on-surface font-bold">Blog Generated</h3>
+                            <p class="font-body-md text-label-sm text-on-surface-variant mt-xs">Your AI article 'Future
+                                of Web 3.0' is ready for review.</p>
+                        </div>
+                        <button class="text-outline hover:text-on-surface transition-colors">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-green-500/30 w-full"></div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-green-500 progress-animate"></div>
+                </div>
+                <!-- Error Toast -->
+                <div
+                    class="glass p-md rounded-xl flex flex-col shadow-[0px_10px_15px_-5px_rgba(0,0,0,0.03)] border-l-4 border-l-error relative overflow-hidden">
+                    <div class="flex items-start gap-sm">
+                        <div
+                            class="bg-error-container text-on-error-container p-base rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="error">error</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-headline-md text-label-md text-on-surface font-bold">Generation Failed</h3>
+                            <p class="font-body-md text-label-sm text-on-surface-variant mt-xs">Unexpected error with
+                                the NLP engine. Please try again.</p>
+                        </div>
+                        <button class="text-outline hover:text-on-surface transition-colors">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-error/30 w-full"></div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-error progress-animate"></div>
+                </div>
+                <!-- Warning Toast -->
+                <div
+                    class="glass p-md rounded-xl flex flex-col shadow-[0px_10px_15px_-5px_rgba(0,0,0,0.03)] border-l-4 border-l-amber-500 relative overflow-hidden">
+                    <div class="flex items-start gap-sm">
+                        <div class="bg-amber-100 text-amber-600 p-base rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="warning">warning</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-headline-md text-label-md text-on-surface font-bold">Low Credits</h3>
+                            <p class="font-body-md text-label-sm text-on-surface-variant mt-xs">You have only 2
+                                generations left this month.</p>
+                        </div>
+                        <button class="text-outline hover:text-on-surface transition-colors">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-amber-500/30 w-full"></div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-amber-500 progress-animate"></div>
+                </div>
+                <!-- Information Toast -->
+                <div
+                    class="glass p-md rounded-xl flex flex-col shadow-[0px_10px_15px_-5px_rgba(0,0,0,0.03)] border-l-4 border-l-primary relative overflow-hidden">
+                    <div class="flex items-start gap-sm">
+                        <div class="bg-primary-fixed text-primary p-base rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-headline-md text-label-md text-on-surface font-bold">Image Generated</h3>
+                            <p class="font-body-md text-label-sm text-on-surface-variant mt-xs">New cover art has been
+                                attached to your draft.</p>
+                        </div>
+                        <button class="text-outline hover:text-on-surface transition-colors">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-primary/30 w-full"></div>
+                    <div class="absolute bottom-0 left-0 h-1 bg-primary progress-animate"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Bento Style Documentation -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
+            <div class="bg-surface-container-low p-lg rounded-xl flex flex-col gap-sm">
+                <span class="material-symbols-outlined text-primary text-[32px]">layers</span>
+                <h4 class="font-headline-md text-headline-md">Glassmorphism</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Built using 60% opacity backgrounds with
+                    high-intensity backdrop blurs for a light, ethereal feel.</p>
+            </div>
+            <div class="bg-surface-container-low p-lg rounded-xl flex flex-col gap-sm">
+                <span class="material-symbols-outlined text-primary text-[32px]">timer</span>
+                <h4 class="font-headline-md text-headline-md">Feedback Loop</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Dynamic progress bars provide immediate
+                    visual feedback on auto-dismiss timings.</p>
+            </div>
+            <div class="bg-surface-container-low p-lg rounded-xl flex flex-col gap-sm">
+                <span class="material-symbols-outlined text-primary text-[32px]">palette</span>
+                <h4 class="font-headline-md text-headline-md">Contextual Color</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Each state utilizes the Luminous AI
+                    semantic palette for clear differentiation.</p>
+            </div>
+        </section>
+        <!-- Image Gallery Placeholder for Cohesion -->
+        <section class="mb-xl">
+            <h2 class="font-headline-lg text-headline-lg mb-lg">Visual Context</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg border border-surface-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="A clean, minimalist workspace with a sleek laptop displaying a high-tech dashboard. The lighting is soft and natural, emphasizing white and indigo accents. The atmosphere is professional, modern, and intellectual, fitting a premium AI content generation platform's brand identity."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDrQ4Fc_ElsxIV9gS3ZO65Kcvfcdqbxxe45vJkHkHVdn-bPyVzoMoIYumX7PCFN8CaYRmnlRNIzD1890tMCnv0KP0q_RqUvgcjagHHzy-wQbrXRrIL8kIdezvfuTU_qOmzJwDPiEk0hxvwOwnB7qVAEJaw45i9aFk2KZQZnAt0OQ0YoIIZtRi_qTnyTv0dBmimzMi9ddBM1-8xGeJ91Zm_iugkCIaZcp9lHH6AyCFBZtLgBf9tUeqRgw" />
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg border border-surface-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="An abstract 3D visualization of digital waves and light particles in shades of deep indigo and soft white. The textures are smooth and ethereal, representing the 'Infinite Canvas' of creative AI possibilities. High-key lighting creates a bright, sophisticated feel consistent with a premium minimalism design system."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkkXnyfEaRHiEnSUH97tQFDrcqRuvAzrO8AvhAGjQfqNYUj2821sGRlb8GvE6q1JScs8Ix5Ev_yNcnOFM2Zrw0G4Bb40HOuiBxYp5jweyUbexe5aV6zia5s9h_XyZvakFyJIRk1YB3FCaLrlzN1q1rcYfywEshIo4_GmuUNQuWV1HZbjotbA05wdfzz71zwOIwxUilNeuFTioBpWev1vuYtx_869Ah0A0BuSDnoruhv4jzz19_o-C-XA" />
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg border border-surface-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="A macro shot of architectural glass with subtle reflections and light refractions. The image emphasizes transparency, layering, and precision. The color palette is composed of cool grays, bright whites, and subtle hints of violet, mirroring the glassmorphism UI style and professional reliability of the platform."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT3OdACrNot6l0kvLyP2TR__qrP3S_ci1GKjiUPrHgeMaKaR6biaLcMCrrh4MOxvHojr1nrHxFsHyfNcLfmsFFhY0nG7CZTwJhCWU5iFV9Wuoctuu65zW6SeSksH0btbfvhMJCrZDkVM_Ui52gTUPDi2SPcAv1sJ_Aw3wErebI5MlpjNsPq0KJ4skK8VGwy9NSTwEJDmCBTLO5u3ntZ5L3OyShl8bRIOO88HmbKIWJXK2G3fCOOqDfyQ" />
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg border border-surface-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="Close-up of high-end tech hardware like a polished aluminum trackpad or a glass-surfaced device. The aesthetic is extremely clean, focusing on materials and build quality. The lighting is bright and airy, using soft shadows to create depth without clutter, perfectly aligning with the Luminous AI brand markers."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZsxOEODBS_F8SV7vDB0XvEvCBeIq9jjnR7c5VakhRsEwntYyoYBK1Somq0ZfBJggTvRx9KVWakboYy2AkGzuuK4JGKSmI69_OFkemlxXHK3jh7bN20rACYbjnSgAIyNlJRnv2W7AkNausb6sJRkZWTT8fc-uI-0jsxhNJguLGPSPcEXIfhzMk9nghLa0xvlxnNGUCTRCmbwQPhan1snREl3c7qfx-j3cGahm0H7s2apCcHEssry0EKQ" />
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Shell -->
+    <footer
+        class="w-full py-xl px-lg flex flex-col md:flex-row justify-between items-center gap-sm max-w-container-max mx-auto bg-transparent mt-xl">
+        <div class="font-display text-label-md font-bold text-on-surface">Luminous AI</div>
+        <div class="flex gap-md">
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Privacy Policy</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Terms of Service</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                href="#">Cookie Policy</a>
+        </div>
+        <div class="font-body-md text-label-sm text-on-surface-variant">© 2024 Luminous AI. All rights reserved.</div>
+    </footer>
+    <!-- Toast Container (Target for triggers) -->
+    <div class="fixed top-24 right-4 z-[100] flex flex-col gap-md w-full max-w-[400px] pointer-events-none"
+        id="toast-portal"></div>
+    <script>
+        function triggerToast(type) {
+            const portal = document.getElementById('toast-portal');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto transform transition-all duration-300 translate-x-full opacity-0 glass p-md rounded-xl flex flex-col shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] border-l-4 relative overflow-hidden';
+
+            let config = {
+                title: '',
+                desc: '',
+                icon: '',
+                color: '',
+                accent: ''
+            };
+
+            switch (type) {
+                case 'success':
+                    config = { title: 'Blog Generated', desc: 'Content created successfully.', icon: 'check_circle', color: 'bg-green-100 text-green-600', accent: 'bg-green-500', border: 'border-l-green-500' };
+                    break;
+                case 'error':
+                    config = { title: 'Generation Failed', desc: 'Could not connect to AI server.', icon: 'error', color: 'bg-error-container text-on-error-container', accent: 'bg-error', border: 'border-l-error' };
+                    break;
+                case 'warning':
+                    config = { title: 'Draft Saved', desc: 'Auto-save completed recently.', icon: 'warning', color: 'bg-amber-100 text-amber-600', accent: 'bg-amber-500', border: 'border-l-amber-500' };
+                    break;
+                case 'info':
+                    config = { title: 'Image Generated', desc: 'Added new visual asset.', icon: 'auto_awesome', color: 'bg-primary-fixed text-primary', accent: 'bg-primary', border: 'border-l-primary' };
+                    break;
+            }
+
+            toast.classList.add(config.border);
+            toast.innerHTML = `
+                <div class="flex items-start gap-sm">
+                    <div class="${config.color} p-base rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined">${config.icon}</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-headline-md text-label-md text-on-surface font-bold">${config.title}</h3>
+                        <p class="font-body-md text-label-sm text-on-surface-variant mt-xs">${config.desc}</p>
+                    </div>
+                    <button class="text-outline hover:text-on-surface transition-colors" onclick="this.closest('.glass').remove()">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
+                <div class="absolute bottom-0 left-0 h-1 ${config.accent} opacity-30 w-full"></div>
+                <div class="absolute bottom-0 left-0 h-1 ${config.accent} progress-animate"></div>
+            `;
+
+            portal.appendChild(toast);
+
+            // Animation Trigger
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+            });
+
+            // Auto Remove
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Access Restricted | Luminous Editorial</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c7c4d8",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#4f46e5",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary": "#712ae2",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "primary": "#3525cd",
+                        "tertiary": "#00505f",
+                        "surface": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "primary-fixed": "#e2dfff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-background": "#191c1d",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-tertiary-fixed": "#001f26",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#acedff",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-dim": "#d9dadb",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777587",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464555",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#93e8ff",
+                        "tertiary-container": "#006a7c",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "md": "1.5rem",
+                        "gutter": "24px",
+                        "xs": "0.5rem",
+                        "xl": "4rem",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .floating-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-surface shadow-sm">
+        <nav class="flex justify-between items-center w-full px-md md:px-xl py-sm max-w-container-max mx-auto">
+            <div class="flex items-center gap-md">
+                <span class="text-headline-md font-display font-bold text-primary">Luminous Editorial</span>
+            </div>
+            <div class="hidden md:flex items-center gap-lg">
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                    href="#">Dashboard</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                    href="#">Templates</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                    href="#">Drafts</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+                    href="#">Settings</a>
+            </div>
+            <div class="flex items-center gap-md">
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help</button>
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+                <div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+                    <img class="w-full h-full object-cover"
+                        data-alt="A professional user profile portrait in a high-key minimalist setting. The lighting is soft and corporate, fitting the Luminous Editorial brand. The subject wears a clean white shirt against a soft grey background, representing a premium AI platform user."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkWgquBKPkOV7-8yJD84E-TerhOH9bd69KoOWtTVUe0NAd5L1gJ66T_SYKULxLX37clEz1owGthsMmwdfmZtKjQ1M4fTZZSP1lERN5i8oo3ER0Vpa8ZfAuSZpHK7fkAr862guwjMsRK66b7ubJOShhVi1gx-I54LSTbvq1uQNgcyVxN4GaLZLE9HOv62dWcYOcRWRf50p4Y6-lXe6KaUatC8sN4o9GAkyIFPgYZ2ifVyQyQRjLDambQQ" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="min-h-screen flex flex-col items-center justify-center pt-xl pb-xl px-sm">
+        <!-- 403 Container -->
+        <div class="max-w-xl w-full text-center space-y-lg">
+            <!-- 3D Isometric Illustration -->
+            <div class="relative w-64 h-64 mx-auto floating-anim">
+                <div class="absolute inset-0 bg-primary-fixed-dim rounded-full blur-3xl opacity-20 scale-150"></div>
+                <div class="relative z-10 w-full h-full flex items-center justify-center">
+                    <!-- Isometric Shield/Gate Proxy -->
+                    <div class="w-full h-full bg-cover bg-center rounded-xl shadow-lg"
+                        data-alt="A premium 3D isometric illustration of a sleek, futuristic metallic security shield with an integrated digital lock icon. The shield is rendered in polished chrome and translucent indigo glass, reflecting a clean white environment. It floats elegantly in the center of the frame, surrounded by ethereal light trails and subtle particle effects. The color palette is dominated by primary indigo and secondary purple tones from the Luminous Editorial design system."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAwn_oocUdYQtYDWhaBVcq3sz-9Pku28L7j8SwYdoQXZvrKkYCc8RsuBT0BhWSJN1-7fKrA8qCICh_1ed_ckWtEsl2kR1AqtZehl9uhhI4l39VkDRSGT-A7uJYeP_1iFqpcR76akdN9hx5mph-32HGgQcQaysA8Do2CM1wgZXEMpKiaOSKq8pFKD0MKUDazqb33Au10u9mo7YDxylo9xkdulyV6WnWVOx9K_10uOWZ8_zKs-gjndrqV2Q')">
+                    </div>
+                </div>
+            </div>
+            <!-- Text Content -->
+            <div class="space-y-sm">
+                <h1 class="font-display text-display tracking-tight text-on-surface">
+                    Access Restricted
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mx-auto leading-relaxed">
+                    It looks like you don't have permission to view this page. If you believe this is an error, please
+                    check your account status or contact support.
+                </p>
+            </div>
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-md pt-md">
+                <a class="px-xl py-md accent-gradient text-on-primary font-label-md text-label-md rounded-xl shadow-lg hover:scale-105 active:scale-95 transition-all duration-200"
+                    href="#">
+                    Go to Dashboard
+                </a>
+                <a class="px-xl py-md bg-surface-container text-primary font-label-md text-label-md border border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors duration-200"
+                    href="#">
+                    Contact Support
+                </a>
+            </div>
+            <!-- Subtle Error Code -->
+            <div class="pt-xl">
+                <span class="font-label-sm text-label-sm text-outline tracking-widest uppercase">Error Code:
+                    403_FORBIDDEN</span>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-outline-variant bg-surface">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center w-full px-md md:px-xl py-lg max-w-container-max mx-auto gap-sm">
+            <div class="flex flex-col items-center md:items-start gap-xs">
+                <span class="font-display font-bold text-on-surface">Luminous Editorial</span>
+                <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Luminous Editorial. Powered by
+                    Advanced AI.</p>
+            </div>
+            <div class="flex gap-md">
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Terms of Service</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Status</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Micro-interaction for primary button
+        const buttons = document.querySelectorAll('button, a');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                // Subtle hover effect logic can go here if needed beyond CSS
+            });
+        });
+    </script>
+</body>
+
+</html>

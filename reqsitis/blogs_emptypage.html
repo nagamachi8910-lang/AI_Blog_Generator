@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Blogs - Luminous AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-primary-container": "#dad7ff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "outline-variant": "#c7c4d8",
+                        "tertiary": "#00505f",
+                        "secondary-fixed": "#eaddff",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-container": "#edeeef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#4f46e5",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "on-tertiary-fixed": "#001f26",
+                        "tertiary-fixed": "#acedff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-tertiary-container": "#93e8ff",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "primary-fixed": "#e2dfff",
+                        "on-surface": "#191c1d",
+                        "on-surface-variant": "#464555",
+                        "inverse-primary": "#c3c0ff",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-container": "#8a4cfc",
+                        "primary": "#3525cd",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "secondary": "#712ae2",
+                        "surface-dim": "#d9dadb",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#25005a",
+                        "tertiary-container": "#006a7c",
+                        "background": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "outline": "#777587",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-on-surface": "#f0f1f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "gutter": "24px",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "md": "1.5rem",
+                        "lg": "2.5rem",
+                        "container-max": "1280px",
+                        "xl": "4rem"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background">
+    <!-- TopNavBar -->
+    <header
+        class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface-container-lowest dark:bg-surface-dim shadow-sm">
+        <div class="flex items-center gap-sm">
+            <span class="font-display text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Luminous
+                AI</span>
+        </div>
+        <div class="hidden md:flex items-center gap-lg">
+            <nav class="flex gap-md">
+                <a class="font-headline-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Pricing</a>
+                <a class="font-headline-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Community</a>
+                <a class="font-headline-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Docs</a>
+            </nav>
+            <div class="flex items-center gap-md">
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">notifications</button>
+                <button
+                    class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">settings</button>
+                <button
+                    class="accent-gradient text-white px-md py-xs rounded-lg font-label-md shadow-sm hover:scale-105 transition-transform active:scale-95">Create
+                    New</button>
+                <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+                    <img class="w-full h-full object-cover"
+                        data-alt="A clean, minimalist profile avatar of a professional user, styled with soft lighting and a neutral gray background to fit a premium AI application aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjFIN_KeM69uef4S3_Drz8FVO12MfNvn8kp0tZmSetqV5l6z2LDwqnpB5gRnVMgjx1gOUS6pOppJc8Fix-SdDW6PAMFB8ZtemTDO7lHhUURI87vwiKJfqrCucCVqiYCvmRE7HQeUJ8t2AreNTFhcsMTtJuVvheLDv4_UHf8ayJn-_ZvzUlw1ufivlyLR_L68hQvA6mu-TQpe8LcjlCv5EkE_UoHsmU3M856yuEtntlk8qIwb4z37Yv4Q" />
+                </div>
+            </div>
+        </div>
+        <button class="md:hidden material-symbols-outlined">menu</button>
+    </header>
+    <!-- SideNavBar -->
+    <aside
+        class="fixed left-0 top-0 h-full hidden md:flex flex-col p-md z-40 bg-surface-container-low dark:bg-surface-container w-64 border-r border-outline-variant mt-[72px]">
+        <div class="flex flex-col gap-xs flex-grow">
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md"
+                href="#">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                Generator
+            </a>
+            <!-- Active Tab: My Blogs -->
+            <a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-xl p-md font-label-md scale-102 transition-transform"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">article</span>
+                My Blogs
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md"
+                href="#">
+                <span class="material-symbols-outlined">analytics</span>
+                Analytics
+            </a>
+        </div>
+        <div class="mt-auto border-t border-outline-variant pt-md flex flex-col gap-xs">
+            <div class="bg-primary/5 rounded-xl p-sm mb-md">
+                <p class="text-label-sm text-primary font-bold mb-xs">Upgrade Pro</p>
+                <p class="text-[10px] text-on-surface-variant leading-tight">Unlock unlimited AI generation and custom
+                    branding.</p>
+            </div>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md"
+                href="#">
+                <span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md"
+                href="#">
+                <span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+        </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="md:ml-64 pt-[72px] min-h-screen flex items-center justify-center p-md">
+        <div class="max-w-4xl w-full flex flex-col items-center">
+            <!-- Empty State Section -->
+            <section
+                class="w-full flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <!-- Illustration Wrapper -->
+                <div class="relative mb-lg w-64 h-64 flex items-center justify-center">
+                    <!-- Atmospheric Background Glow -->
+                    <div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full"></div>
+                    <!-- Paper Stack Illustration -->
+                    <div
+                        class="relative z-10 w-48 h-56 glass-panel rounded-xl shadow-xl transform -rotate-3 border border-white/40 flex flex-col p-md gap-sm overflow-hidden">
+                        <div class="w-full h-2 bg-on-surface-variant/10 rounded-full"></div>
+                        <div class="w-3/4 h-2 bg-on-surface-variant/10 rounded-full"></div>
+                        <div class="w-full h-2 bg-on-surface-variant/10 rounded-full"></div>
+                        <div class="w-5/6 h-2 bg-on-surface-variant/10 rounded-full mt-auto"></div>
+                        <!-- Floating Magic Wand / Sparkle -->
+                        <div class="absolute -top-4 -right-4 w-20 h-20 animate-pulse">
+                            <span class="material-symbols-outlined text-[64px] text-primary drop-shadow-lg"
+                                style="font-variation-settings: 'FILL' 1;">magic_button</span>
+                        </div>
+                    </div>
+                    <!-- Second Paper for depth -->
+                    <div
+                        class="absolute z-0 w-48 h-56 bg-surface-container-highest rounded-xl shadow-md transform rotate-6 -translate-x-4 border border-outline-variant/30">
+                    </div>
+                    <!-- Floating Particles / Sparkles (JS could animate these) -->
+                    <div class="absolute top-10 left-0 animate-bounce duration-[3000ms]">
+                        <span class="material-symbols-outlined text-secondary text-xl"
+                            style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    </div>
+                    <div class="absolute bottom-10 right-0 animate-bounce duration-[4000ms]">
+                        <span class="material-symbols-outlined text-tertiary-fixed-dim text-2xl"
+                            style="font-variation-settings: 'FILL' 1;">spark</span>
+                    </div>
+                </div>
+                <!-- Content -->
+                <h1 class="font-display text-headline-lg md:text-display text-on-surface mb-md">
+                    Your content library is a <span class="text-primary italic">blank canvas</span>
+                </h1>
+                <p class="font-body-lg text-on-surface-variant max-w-xl mx-auto mb-xl">
+                    Start your creative journey by generating your first AI-powered blog post today. Our advanced models
+                    are ready to turn your ideas into compelling narratives.
+                </p>
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row items-center gap-md">
+                    <button
+                        class="accent-gradient text-white px-lg py-md rounded-full font-label-md text-body-md shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-xs">
+                        <span class="material-symbols-outlined">add</span>
+                        Create New Blog
+                    </button>
+                    <a class="px-lg py-md rounded-full font-label-md text-body-md border border-outline-variant hover:bg-surface-container transition-all flex items-center gap-xs"
+                        href="#">
+                        <span class="material-symbols-outlined">grid_view</span>
+                        Browse Templates
+                    </a>
+                </div>
+            </section>
+            <!-- Quick Access Bento (Secondary Context) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full mt-xl">
+                <div
+                    class="glass-panel p-md rounded-2xl flex flex-col gap-sm hover:shadow-lg transition-shadow border border-outline-variant/20">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">psychology</span>
+                    </div>
+                    <h3 class="font-headline-md text-label-md">Topic Research</h3>
+                    <p class="text-label-sm text-on-surface-variant">Let AI find the perfect trending topics for your
+                        niche.</p>
+                </div>
+                <div
+                    class="glass-panel p-md rounded-2xl flex flex-col gap-sm hover:shadow-lg transition-shadow border border-outline-variant/20">
+                    <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-secondary">history_edu</span>
+                    </div>
+                    <h3 class="font-headline-md text-label-md">Draft Optimization</h3>
+                    <p class="text-label-sm text-on-surface-variant">Import your notes and let Luminous polish them to
+                        perfection.</p>
+                </div>
+                <div
+                    class="glass-panel p-md rounded-2xl flex flex-col gap-sm hover:shadow-lg transition-shadow border border-outline-variant/20">
+                    <div class="w-10 h-10 bg-tertiary-container/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-tertiary">share</span>
+                    </div>
+                    <h3 class="font-headline-md text-label-md">Direct Publish</h3>
+                    <p class="text-label-sm text-on-surface-variant">Connect your WordPress or Webflow for one-click
+                        publishing.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest shadow-[0_-1px_10px_rgba(0,0,0,0.05)] z-50 flex justify-around items-center py-sm">
+        <button class="flex flex-col items-center gap-xs text-on-surface-variant">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px] font-label-sm">Home</span>
+        </button>
+        <button class="flex flex-col items-center gap-xs text-on-surface-variant">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="text-[10px] font-label-sm">Gen</span>
+        </button>
+        <button class="flex flex-col items-center gap-xs text-primary">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">article</span>
+            <span class="text-[10px] font-label-sm">Blogs</span>
+        </button>
+        <button class="flex flex-col items-center gap-xs text-on-surface-variant">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="text-[10px] font-label-sm">Settings</span>
+        </button>
+    </nav>
+    <script>
+        // Micro-interactions for floating particles
+        document.addEventListener('mousemove', (e) => {
+            const sparkles = document.querySelectorAll('.material-symbols-outlined.text-secondary, .material-symbols-outlined.text-tertiary-fixed-dim');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            sparkles.forEach((sparkle, index) => {
+                const moveX = (mouseX - 0.5) * (index + 1) * 20;
+                const moveY = (mouseY - 0.5) * (index + 1) * 20;
+                sparkle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>

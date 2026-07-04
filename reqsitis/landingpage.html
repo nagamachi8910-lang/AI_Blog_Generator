@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Blog Generator - Your Blog, Powered by Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-surface-variant": "#464555",
+                        "secondary": "#712ae2",
+                        "on-secondary-container": "#fffbff",
+                        "tertiary": "#00505f",
+                        "surface-container-high": "#e7e8e9",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "background": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#93e8ff",
+                        "tertiary-fixed": "#acedff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "outline": "#777587",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "inverse-surface": "#2e3132",
+                        "primary": "#3525cd",
+                        "on-secondary-fixed": "#25005a",
+                        "on-tertiary-fixed": "#001f26",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-surface": "#191c1d",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#006a7c",
+                        "primary-container": "#4f46e5",
+                        "secondary-fixed": "#eaddff",
+                        "primary-fixed": "#e2dfff",
+                        "surface-variant": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#8a4cfc",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed": "#0f0069"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "1rem",
+                        "gutter": "24px",
+                        "xs": "0.5rem",
+                        "base": "4px",
+                        "lg": "2.5rem",
+                        "xl": "4rem",
+                        "md": "1.5rem",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+
+        .soft-elevation {
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 10px 15px -5px rgba(0, 0, 0, 0.03);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center max-w-container-max mx-auto px-gutter h-20">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-headline-md"
+                    style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <span class="font-headline-md text-headline-md font-bold text-primary">AI Blog Generator</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#home">Home</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#features">Features</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#pricing">Pricing</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#docs">Docs</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="text-on-surface-variant font-label-md hover:text-primary transition-colors hover:scale-105">Login</button>
+                <button
+                    class="accent-gradient text-white px-6 py-2.5 rounded-full font-label-md hover:scale-105 transition-transform active:scale-95">Sign
+                    Up</button>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-xl px-gutter overflow-hidden" id="home">
+        <div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-lg items-center">
+            <div class="z-10 text-center lg:text-left">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full font-label-sm mb-6">NEW:
+                    GPT-4 INTEGRATION</span>
+                <h1 class="font-display text-display text-on-surface mb-md">
+                    Your Blog, Powered by <span
+                        class="text-transparent bg-clip-text accent-gradient">Intelligence</span>
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-xl mx-auto lg:mx-0">
+                    Transform ideas into publication-ready posts in seconds with the world's most advanced AI writing
+                    platform. Boost your SEO and scale your content effortlessly.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <button
+                        class="accent-gradient text-white px-8 py-4 rounded-xl font-label-md text-lg shadow-lg hover:scale-105 transition-all">Get
+                        Started for Free</button>
+                    <button
+                        class="bg-white border border-outline-variant text-primary px-8 py-4 rounded-xl font-label-md text-lg hover:bg-surface-container transition-colors">View
+                        Demo</button>
+                </div>
+            </div>
+            <div class="relative lg:h-[600px] flex items-center justify-center">
+                <div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+                <img class="w-full h-auto object-contain drop-shadow-2xl hover:translate-y-[-10px] transition-transform duration-700"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNEU5hqUoEMCzCtyAZn8ORe1-aYYOd_Rp0yEkAg5p0ml09cU41c-SRbc3610JGPZa3RmB4aoLjPxqlqdZfgeBQBqPOsfsTv6OXwbOx3j7eryFH_zNGwPYZPYv_ePgEbPwMptoeiWkgH4xiLdfTZ4GLe9vttL9I4ned3_e8O3mHeUtVLZO3YXTWwjMtvDfhZPjIdYdyX6P63ENfEAyd8qvGgpz1sN6pu0_Edwr_2Bg7HARFDByRAt1rDg" />
+            </div>
+        </div>
+    </header>
+    <!-- Features Section - Bento Grid -->
+    <section class="py-xl px-gutter bg-surface-container-low" id="features">
+        <div class="max-w-container-max mx-auto">
+            <div class="text-center mb-xl">
+                <h2 class="font-headline-lg text-headline-lg mb-sm">Unleash Your Content Potential</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">Precision engineering meets creative intelligence.
+                    Everything you need to dominate the SERPs.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                <!-- AI Writing -->
+                <div
+                    class="col-span-1 md:col-span-2 bg-white p-lg rounded-[16px] soft-elevation border border-outline-variant/30 flex flex-col md:flex-row gap-md items-center group">
+                    <div class="w-full md:w-1/2">
+                        <div
+                            class="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary">edit_note</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-xs">Advanced AI Writing</h3>
+                        <p class="text-on-surface-variant">Context-aware generation that mimics your unique brand voice.
+                            From short bursts to long-form editorial pieces, our models understand nuance and narrative
+                            flow.</p>
+                    </div>
+                    <div
+                        class="w-full md:w-1/2 bg-surface-container rounded-xl h-48 flex items-center justify-center overflow-hidden">
+                        <div class="p-6 space-y-3 w-full">
+                            <div class="h-2 bg-primary/20 rounded-full w-3/4"></div>
+                            <div class="h-2 bg-primary/10 rounded-full w-full"></div>
+                            <div class="h-2 bg-primary/20 rounded-full w-5/6"></div>
+                            <div class="h-2 bg-primary/10 rounded-full w-2/3"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SEO -->
+                <div class="bg-white p-lg rounded-[16px] soft-elevation border border-outline-variant/30 group">
+                    <div
+                        class="bg-secondary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-secondary">trending_up</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md mb-xs">SEO Optimization</h3>
+                    <p class="text-on-surface-variant">Real-time keyword analysis and meta-tag generation to ensure your
+                        content reaches the front page.</p>
+                </div>
+                <!-- One Click -->
+                <div class="bg-white p-lg rounded-[16px] soft-elevation border border-outline-variant/30 group">
+                    <div
+                        class="bg-tertiary-container/10 w-12 h-12 rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-tertiary-container">rocket_launch</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md mb-xs">One-Click Publishing</h3>
+                    <p class="text-on-surface-variant">Seamless integration with WordPress, Ghost, and Shopify. Go from
+                        draft to live in seconds.</p>
+                </div>
+                <!-- Image Gen -->
+                <div
+                    class="col-span-1 md:col-span-2 bg-white p-lg rounded-[16px] soft-elevation border border-outline-variant/30 flex flex-col md:flex-row-reverse gap-md items-center group">
+                    <div class="w-full md:w-1/2">
+                        <div
+                            class="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary">image</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-xs">AI Image Generation</h3>
+                        <p class="text-on-surface-variant">Every post deserves a stunning visual. Our system generates
+                            custom high-resolution illustrations to match your text perfectly.</p>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="w-full h-48 rounded-xl bg-cover bg-center"
+                            data-alt="A modern and atmospheric digital illustration of a stylized workspace with clean lines and soft purple lighting. Abstract geometric shapes and glowing nodes representing creative ideas float in the air. High-end SaaS aesthetic with a professional and innovative mood."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsy_6HzT-rp--GEDb-e4fGMmIwOTl3yoXriBV0OaCWdsUkRWkD7IjoMNu84wK7Ydr6U0tyFCqeC3dQCPj6JTqNrJG7ho8XaWqtR90O2HAjGie_ke1xYY8GVWS_I3cjSjPbkjg4vBiJLYHTLAxrf1fjyu_C_LPRuBeUOlyLCMFzvK3YkSNXSiP3H7RYBXzF5OAOoLigfNfdc94G8W3OI5AdPKTqJAcwxpQCOcFv9yPHv6D2EoF7zf8cCw')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section -->
+    <section class="py-xl px-gutter bg-surface">
+        <div class="max-w-container-max mx-auto">
+            <div class="text-center mb-xl">
+                <h2 class="font-headline-lg text-headline-lg mb-sm">Simple Workflow, Powerful Results</h2>
+                <p class="text-on-surface-variant">Four steps from blank page to viral sensation.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-md relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/4 left-0 w-full h-[1px] bg-outline-variant -z-10"></div>
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-md font-bold text-lg shadow-lg relative z-10">
+                        1</div>
+                    <h4 class="font-headline-sm font-semibold mb-xs">Input Topic</h4>
+                    <p class="text-label-md text-on-surface-variant px-sm">Provide a keyword or a brief description of
+                        your idea.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-primary border-2 border-primary rounded-full flex items-center justify-center mx-auto mb-md font-bold text-lg shadow-sm relative z-10">
+                        2</div>
+                    <h4 class="font-headline-sm font-semibold mb-xs">AI Outline</h4>
+                    <p class="text-label-md text-on-surface-variant px-sm">Review a comprehensive, SEO-friendly
+                        structured outline.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-primary border-2 border-primary rounded-full flex items-center justify-center mx-auto mb-md font-bold text-lg shadow-sm relative z-10">
+                        3</div>
+                    <h4 class="font-headline-sm font-semibold mb-xs">Refine &amp; Edit</h4>
+                    <p class="text-label-md text-on-surface-variant px-sm">Collaborate with AI to polish the tone and
+                        add personal touches.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 bg-white text-primary border-2 border-primary rounded-full flex items-center justify-center mx-auto mb-md font-bold text-lg shadow-sm relative z-10">
+                        4</div>
+                    <h4 class="font-headline-sm font-semibold mb-xs">Publish</h4>
+                    <p class="text-label-md text-on-surface-variant px-sm">Connect your blog and publish directly with
+                        one click.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Supported Models Section -->
+    <section class="py-lg px-gutter border-y border-outline-variant/30">
+        <div
+            class="max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between gap-md opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <span class="font-label-md text-on-surface-variant uppercase tracking-widest">Powering the engine:</span>
+            <div class="flex flex-wrap justify-center gap-xl items-center">
+                <span class="font-headline-sm font-bold text-on-surface">GPT-4o</span>
+                <span class="font-headline-sm font-bold text-on-surface">Claude 3.5</span>
+                <span class="font-headline-sm font-bold text-on-surface">Llama 3</span>
+                <span class="font-headline-sm font-bold text-on-surface">Mistral AI</span>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="py-xl px-gutter bg-surface-container-lowest">
+        <div class="max-w-container-max mx-auto">
+            <div class="text-center mb-xl">
+                <h2 class="font-headline-lg text-headline-lg mb-sm">Trusted by Industry Leaders</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+                <div class="p-lg rounded-[16px] bg-white border border-outline-variant/50 soft-elevation italic">
+                    <p class="text-body-lg mb-md text-on-surface">"The quality of output from this generator is
+                        indistinguishable from professional human writing. It has cut our content production time by
+                        80%."</p>
+                    <div class="flex items-center gap-sm mt-auto not-italic">
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                            SJ</div>
+                        <div>
+                            <p class="font-bold text-on-surface">Sarah Jenkins</p>
+                            <p class="text-label-sm text-on-surface-variant">CMO at TechStream</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-lg rounded-[16px] bg-white border border-outline-variant/50 soft-elevation italic">
+                    <p class="text-body-lg mb-md text-on-surface">"SEO optimization used to be a chore. Now, every post
+                        is pre-configured for success. Our organic traffic is up 45% in just three months."</p>
+                    <div class="flex items-center gap-sm mt-auto not-italic">
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center font-bold text-secondary">
+                            MK</div>
+                        <div>
+                            <p class="font-bold text-on-surface">Marcus Kinsley</p>
+                            <p class="text-label-sm text-on-surface-variant">Founder, GrowthHub</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-lg rounded-[16px] bg-white border border-outline-variant/50 soft-elevation italic md:hidden lg:block">
+                    <p class="text-body-lg mb-md text-on-surface">"The best part is the seamless publishing integration.
+                        I don't even have to log into WordPress anymore. It's a game-changer for solo creators."</p>
+                    <div class="flex items-center gap-sm mt-auto not-italic">
+                        <div
+                            class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center font-bold text-tertiary-container">
+                            EL</div>
+                        <div>
+                            <p class="font-bold text-on-surface">Elena Lopez</p>
+                            <p class="text-label-sm text-on-surface-variant">Content Strategist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="py-xl px-gutter">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-headline-lg text-headline-lg mb-xl text-center">Frequently Asked Questions</h2>
+            <div class="space-y-sm">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl border border-outline-variant overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-md text-left group"
+                        onclick="toggleFaq(this)">
+                        <span class="font-headline-sm text-headline-sm">Is the AI content original?</span>
+                        <span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="p-md pt-0 text-on-surface-variant">Yes, our models generate content from scratch based
+                            on your unique inputs. We also provide built-in plagiarism checks to ensure 100% originality
+                            before you publish.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl border border-outline-variant overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-md text-left group"
+                        onclick="toggleFaq(this)">
+                        <span class="font-headline-sm text-headline-sm">Can I train it on my own brand voice?</span>
+                        <span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="p-md pt-0 text-on-surface-variant">Absolutely. Our Pro plan allows you to upload
+                            existing content samples so the AI can learn your specific tone, vocabulary, and style
+                            preferences.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl border border-outline-variant overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-md text-left group"
+                        onclick="toggleFaq(this)">
+                        <span class="font-headline-sm text-headline-sm">Which platforms do you integrate with?</span>
+                        <span class="material-symbols-outlined transition-transform duration-300">expand_more</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="p-md pt-0 text-on-surface-variant">We currently support direct one-click publishing to
+                            WordPress, Ghost, Shopify, and Medium. More integrations like Webflow and Wix are coming
+                            soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w-full py-xl bg-surface-container-low border-t border-outline-variant/30">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-md max-w-container-max mx-auto px-gutter">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-2 mb-md">
+                    <span class="material-symbols-outlined text-primary text-headline-sm"
+                        style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    <span class="font-headline-sm text-headline-sm font-semibold text-primary">AI Blog Generator</span>
+                </div>
+                <p class="text-on-surface-variant max-w-xs mb-md">Elevating human creativity through artificial
+                    intelligence. Join 5,000+ creators scaling their message today.</p>
+                <p class="font-label-md text-label-md text-on-surface-variant opacity-80">© 2024 AI Blog Generator. All
+                    rights reserved.</p>
+            </div>
+            <div>
+                <h5 class="font-bold mb-md">Product</h5>
+                <ul class="space-y-sm font-label-md text-on-surface-variant">
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Features</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Integrations
+                    </li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Pricing</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Changelog
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold mb-md">Resources</h5>
+                <ul class="space-y-sm font-label-md text-on-surface-variant">
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Documentation
+                    </li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Blog</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Community
+                    </li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">API</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold mb-md">Company</h5>
+                <ul class="space-y-sm font-label-md text-on-surface-variant">
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">About</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Privacy
+                        Policy</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">Terms</li>
+                    <li class="hover:translate-x-1 transition-transform cursor-pointer hover:text-primary">GitHub</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.material-symbols-outlined');
+
+            // Close other FAQ items
+            document.querySelectorAll('.max-h-96').forEach(item => {
+                if (item !== content) {
+                    item.classList.remove('max-h-96');
+                    item.classList.add('max-h-0');
+                    item.previousElementSibling.querySelector('.material-symbols-outlined').classList.remove('rotate-180');
+                }
+            });
+
+            // Toggle current item
+            if (content.classList.contains('max-h-0')) {
+                content.classList.remove('max-h-0');
+                content.classList.add('max-h-96');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.remove('max-h-96');
+                content.classList.add('max-h-0');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Simple scroll behavior for nav active state
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, header');
+            const navLinks = document.querySelectorAll('nav a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+                link.classList.add('text-on-surface-variant');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+                    link.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

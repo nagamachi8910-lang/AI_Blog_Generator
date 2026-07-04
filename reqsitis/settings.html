@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Settings | Lumina AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "tertiary": "#00505f",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-primary-container": "#dad7ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-fixed": "#eaddff",
+                        "primary-container": "#4f46e5",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "secondary-container": "#8a4cfc",
+                        "on-surface-variant": "#464555",
+                        "surface-container": "#edeeef",
+                        "on-secondary-fixed": "#25005a",
+                        "outline-variant": "#c7c4d8",
+                        "on-secondary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#c3c0ff",
+                        "surface-tint": "#4d44e3",
+                        "surface-variant": "#e1e3e4",
+                        "tertiary-fixed": "#acedff",
+                        "secondary": "#712ae2",
+                        "on-tertiary-container": "#93e8ff",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "tertiary-container": "#006a7c",
+                        "on-primary-fixed": "#0f0069",
+                        "background": "#f8f9fa",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "lg": "2.5rem",
+                        "xl": "4rem",
+                        "gutter": "24px",
+                        "md": "1.5rem",
+                        "container-max": "1280px",
+                        "xs": "0.5rem",
+                        "sm": "1rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom Toggle Switch Style */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #3525cd;
+            background-color: #3525cd;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #4f46e5;
+        }
+
+        .premium-shadow {
+            shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 10px 15px -5px rgba(0, 0, 0, 0.03);
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #712ae2 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface selection:bg-primary-fixed-dim">
+    <!-- TopAppBar Shell -->
+    <header
+        class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface-bright shadow-sm">
+        <div class="flex items-center gap-8">
+            <span class="font-display text-headline-md text-primary">Lumina AI</span>
+            <nav class="hidden md:flex items-center gap-6">
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Dashboard</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">My Blogs</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Templates</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Analytics</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="relative hidden sm:block">
+                <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input
+                    class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-64 text-label-md focus:ring-2 focus:ring-primary transition-all"
+                    placeholder="Search settings..." type="text" />
+            </div>
+            <button
+                class="accent-gradient text-on-primary px-6 py-2 rounded-full font-label-md hover:scale-[1.02] transition-transform shadow-lg">Create
+                New</button>
+            <div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border-2 border-primary-fixed">
+                <img class="w-full h-full object-cover"
+                    data-alt="A professional studio portrait of a modern software executive in high-key lighting. The lighting is soft and flattering with a clean white minimalist background, reflecting a premium AI software user profile aesthetics. The color palette is composed of soft greys and deep indigo highlights."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9EPgkqI89776RBfd7BGJFdfusf9eqhKiY-7zStFTCyhthk-CjsYceNT4WjPJnCFMKRfxJy8j9wsC9ObAlUGxpeqrtVrZ0EBw-hVG7OJ-5aZj2RhqD0ADev30cu3_vQe5c8VSBO6rEAXpw0smaFMAkPUIw7ikD3anKfabN4r2PYWtC0_mFoveNz9Yvj_66a7Bj1tSP_5s9SzI2_IDzLUqm2gGkOaEkrLfhfvVjdJw35eu9cLt2KjRO8g" />
+            </div>
+        </div>
+    </header>
+    <!-- SideNavBar Shell -->
+    <aside
+        class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex flex-col py-md bg-surface-container-lowest border-r border-outline-variant z-40 hidden md:flex">
+        <div class="px-6 mb-8">
+            <div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl">
+                <div
+                    class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+                    <span class="material-symbols-outlined">auto_awesome</span>
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface font-bold">Pro Writer</p>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Enterprise Plan</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 space-y-1">
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
+                href="#">
+                <span class="material-symbols-outlined group-hover:text-primary">auto_awesome</span>
+                <span class="font-label-md">Generator</span>
+            </a>
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
+                href="#">
+                <span class="material-symbols-outlined group-hover:text-primary">book_2</span>
+                <span class="font-label-md">Library</span>
+            </a>
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
+                href="#">
+                <span class="material-symbols-outlined group-hover:text-primary">key</span>
+                <span class="font-label-md">Keywords</span>
+            </a>
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
+                href="#">
+                <span class="material-symbols-outlined group-hover:text-primary">troubleshoot</span>
+                <span class="font-label-md">SEO Audit</span>
+            </a>
+            <a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 transition-all"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md">Settings</span>
+            </a>
+        </nav>
+        <div class="px-4 py-6 border-t border-outline-variant space-y-1">
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all"
+                href="#">
+                <span class="material-symbols-outlined">help</span>
+                <span class="font-label-md text-label-md">Help</span>
+            </a>
+            <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all"
+                href="#">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-label-md text-label-md">Logout</span>
+            </a>
+            <div class="mt-4 p-4 accent-gradient rounded-xl text-on-primary">
+                <p class="font-label-sm mb-2 opacity-90 text-[11px]">UNLOCK FULL POWER</p>
+                <button
+                    class="w-full bg-white/20 hover:bg-white/30 py-2 rounded-lg text-label-md font-bold transition-all">Upgrade
+                    Power</button>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="md:ml-64 pt-24 pb-xl px-gutter md:px-xl">
+        <div class="max-w-[800px] mx-auto">
+            <header class="mb-12">
+                <h1 class="font-display text-headline-lg text-on-surface">Platform Settings</h1>
+                <p class="font-body-md text-on-surface-variant mt-2">Manage your account preferences, AI model
+                    configurations, and security protocols.</p>
+            </header>
+            <div class="space-y-8">
+                <!-- 1. Appearance -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">Appearance</h2>
+                            <p class="font-label-md text-on-surface-variant">Customize how Lumina AI looks on your
+                                screen.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">palette</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block font-label-sm text-on-surface-variant mb-3 uppercase">Theme Mode</label>
+                            <div class="flex p-1 bg-surface-container-low rounded-xl w-fit">
+                                <button
+                                    class="px-6 py-2 rounded-lg bg-white shadow-sm font-label-md text-primary flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px]">light_mode</span> Light
+                                </button>
+                                <button
+                                    class="px-6 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md flex items-center gap-2 transition-all">
+                                    <span class="material-symbols-outlined text-[18px]">dark_mode</span> Dark
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-label-sm text-on-surface-variant mb-3 uppercase">Font Size</label>
+                            <select
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-body-md focus:ring-2 focus:ring-primary">
+                                <option>Default (16px)</option>
+                                <option>Compact (14px)</option>
+                                <option>Large (18px)</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+                <!-- 2. Language -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">Language</h2>
+                            <p class="font-label-md text-on-surface-variant">Set your preferred interface language.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">translate</span>
+                    </div>
+                    <div>
+                        <select
+                            class="w-full max-w-md bg-surface-container-low border-none rounded-xl py-3 px-4 text-body-md focus:ring-2 focus:ring-primary">
+                            <option>English (US)</option>
+                            <option>English (UK)</option>
+                            <option>Spanish (Español)</option>
+                            <option>French (Français)</option>
+                            <option>German (Deutsch)</option>
+                            <option>Japanese (日本語)</option>
+                        </select>
+                    </div>
+                </section>
+                <!-- 3. Preferred AI Models -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">AI Engine Configuration</h2>
+                            <p class="font-label-md text-on-surface-variant">Default models for generation tasks.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">smart_toy</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block font-label-sm text-on-surface-variant uppercase">Preferred LLM</label>
+                            <select
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-body-md focus:ring-2 focus:ring-primary">
+                                <option>GPT-4o (Omni)</option>
+                                <option>Claude 3.5 Sonnet</option>
+                                <option>GPT-4 Turbo</option>
+                                <option>Llama 3 (70B)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block font-label-sm text-on-surface-variant uppercase">Preferred Image
+                                Model</label>
+                            <select
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-body-md focus:ring-2 focus:ring-primary">
+                                <option>DALL-E 3</option>
+                                <option>Midjourney v6</option>
+                                <option>Stable Diffusion XL</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+                <!-- 4. Notification Settings -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">Notifications</h2>
+                            <p class="font-label-md text-on-surface-variant">Manage how and when we reach you.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">notifications</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center justify-between py-3 border-b border-surface-container last:border-0">
+                            <div>
+                                <p class="font-body-md font-medium">Email Notifications</p>
+                                <p class="text-label-md text-on-surface-variant">Weekly summaries and generation
+                                    reports.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input checked="" class="sr-only peer" type="checkbox" />
+                                <div
+                                    class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                </div>
+                            </label>
+                        </div>
+                        <div
+                            class="flex items-center justify-between py-3 border-b border-surface-container last:border-0">
+                            <div>
+                                <p class="font-body-md font-medium">Push Notifications</p>
+                                <p class="text-label-md text-on-surface-variant">Real-time status updates on long tasks.
+                                </p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input checked="" class="sr-only peer" type="checkbox" />
+                                <div
+                                    class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                </div>
+                            </label>
+                        </div>
+                        <div
+                            class="flex items-center justify-between py-3 border-b border-surface-container last:border-0">
+                            <div>
+                                <p class="font-body-md font-medium">Marketing &amp; News</p>
+                                <p class="text-label-md text-on-surface-variant">Feature releases and system
+                                    announcements.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input class="sr-only peer" type="checkbox" />
+                                <div
+                                    class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+                <!-- 5. Security -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">Security &amp; Privacy</h2>
+                            <p class="font-label-md text-on-surface-variant">Protect your account and workspace data.
+                            </p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <div class="mb-10">
+                        <div class="flex items-center justify-between p-4 bg-primary-fixed/30 rounded-xl">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-primary">vibration</span>
+                                <div>
+                                    <p class="font-body-md font-bold">Two-Factor Authentication</p>
+                                    <p class="text-label-sm text-on-surface-variant">Highly recommended for Enterprise
+                                        accounts.</p>
+                                </div>
+                            </div>
+                            <button
+                                class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md hover:opacity-90 transition-opacity">Enable
+                                2FA</button>
+                        </div>
+                    </div>
+                    <h3 class="font-label-sm text-on-surface-variant uppercase mb-4">Active Sessions</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border border-surface-container rounded-xl">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-on-surface-variant">desktop_windows</span>
+                                <div>
+                                    <p class="font-label-md font-bold">MacBook Pro 16" - San Francisco, US</p>
+                                    <p class="text-[12px] text-primary">Current Session</p>
+                                </div>
+                            </div>
+                            <span class="text-label-sm text-on-surface-variant">Active now</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-surface-container rounded-xl">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-on-surface-variant">smartphone</span>
+                                <div>
+                                    <p class="font-label-md font-bold">iPhone 15 Pro - Austin, US</p>
+                                    <p class="text-[12px] text-on-surface-variant">Mobile App</p>
+                                </div>
+                            </div>
+                            <button class="text-error font-label-sm hover:underline">Revoke</button>
+                        </div>
+                    </div>
+                </section>
+                <!-- 6. API Keys -->
+                <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="font-headline-md text-on-surface">API Access</h2>
+                            <p class="font-label-md text-on-surface-variant">Integrate Lumina AI directly into your
+                                applications.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">api</span>
+                    </div>
+                    <div
+                        class="border-2 border-dashed border-outline-variant rounded-xl p-8 text-center bg-surface-container-low/50">
+                        <div
+                            class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                            <span class="material-symbols-outlined text-primary">key_off</span>
+                        </div>
+                        <p class="font-body-md text-on-surface-variant mb-6">No API keys generated yet. Creating a key
+                            allows you to use our endpoints for custom automation.</p>
+                        <button
+                            class="accent-gradient text-on-primary px-8 py-3 rounded-xl font-label-md hover:scale-[1.02] transition-transform">Generate
+                            New Secret Key</button>
+                    </div>
+                </section>
+                <!-- 7. Danger Zone -->
+                <section class="bg-error-container/10 border-2 border-error/20 rounded-2xl p-8">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="bg-error/10 p-2 rounded-lg text-error">
+                            <span class="material-symbols-outlined">warning</span>
+                        </div>
+                        <div>
+                            <h2 class="font-headline-md text-error">Danger Zone</h2>
+                            <p class="font-label-md text-on-surface-variant">Irreversible actions regarding your account
+                                and data.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button
+                            class="flex-1 border border-outline-variant hover:bg-surface-container py-3 rounded-xl font-label-md transition-colors text-on-surface">Reset
+                            All Settings</button>
+                        <button
+                            class="flex-1 bg-error text-on-error py-3 rounded-xl font-label-md hover:bg-error/90 transition-colors">Delete
+                            Account</button>
+                    </div>
+                </section>
+                <!-- 8. Logout Footer -->
+                <div class="pt-8 flex flex-col items-center">
+                    <button
+                        class="flex items-center gap-2 text-on-surface-variant hover:text-error transition-colors font-label-md">
+                        <span class="material-symbols-outlined">logout</span>
+                        Sign out of Lumina AI
+                    </button>
+                    <p class="mt-8 text-label-sm text-outline">© 2024 Lumina AI Technologies. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer for mobile view (Bottom Nav) -->
+    <nav
+        class="md:hidden fixed bottom-0 w-full bg-surface-bright border-t border-outline-variant flex justify-around items-center h-16 px-gutter z-50">
+        <a class="flex flex-col items-center text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="text-[10px] font-label-sm">Build</span>
+        </a>
+        <a class="flex flex-col items-center text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="text-[10px] font-label-sm">Stats</span>
+        </a>
+        <a class="flex flex-col items-center text-primary" href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+            <span class="text-[10px] font-label-sm">Settings</span>
+        </a>
+        <a class="flex flex-col items-center text-on-surface-variant" href="#">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span class="text-[10px] font-label-sm">Profile</span>
+        </a>
+    </nav>
+    <script>
+        // Micro-interactions for toggles
+        const toggles = document.querySelectorAll('input[type="checkbox"]');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', function () {
+                const parent = this.closest('section');
+                if (this.checked) {
+                    console.log('Feature enabled');
+                } else {
+                    console.log('Feature disabled');
+                }
+            });
+        });
+
+        // Search Bar Focus Effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.classList.add('w-80');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.classList.remove('w-80');
+        });
+    </script>
+</body>
+
+</html>
