@@ -1,0 +1,13 @@
+<p class="blog-section-paragraph text-base leading-relaxed text-gray-700 my-4">{{ content }}</p>
+{% if images %}
+<div class="blog-section-images my-6 flex flex-wrap gap-4 justify-center">
+    {% for img in images %}
+    <div class="blog-image-wrapper border rounded-lg shadow-sm bg-white p-2">
+        <img src="{{ img.image.url }}" alt="{{ img.prompt }}" class="rounded-md max-w-full h-auto">
+        {% if img.prompt %}
+        <p class="text-xs text-gray-400 mt-2 text-center">{{ img.prompt }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

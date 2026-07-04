@@ -151,6 +151,9 @@
 </head>
 
 <body class="bg-background text-on-surface antialiased">
+    <!-- Generation Config (read by JS for AJAX) -->
+    <div id="generation-config" data-csrf="{{ csrf_token }}" data-generate-url="{% url 'generator:api_generate' %}"
+        style="display:none;"></div>
     <!-- TopNavBar -->
     <header
         class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-container-max mx-auto shadow-sm bg-surface-container-lowest dark:bg-surface-dim">
@@ -231,15 +234,22 @@
             </a>
         </div>
     </aside>
-    <!-- Main Content Canvas -->
     <main class="ml-64 pt-24 pb-12 px-lg min-h-screen flex flex-col items-center">
         <div class="max-w-4xl w-full">
             <!-- Header Section -->
             <div class="text-center mb-xl">
                 <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Generating Your Blog</h1>
                 <p class="font-body-md text-body-md text-on-surface-variant">Please wait while our AI creates your
-                    content. This usually takes 3-5 minutes.</p>
+                    content. This usually takes under a minute.</p>
+                {% if params.topic %}
+                <p class="font-label-md text-primary mt-2">Topic: {{ params.topic }}</p>
+                {% endif %}
             </div>
+
+            <div id="generation-config" data-csrf="{{ csrf_token }}"
+                data-generate-url="{% url 'generator:api_generate' %}">
+            </div>
+
             <!-- Main Progress Card -->
             <div
                 class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden mb-lg">
@@ -250,11 +260,12 @@
                             <circle class="text-surface-container stroke-current" cx="50" cy="50" fill="transparent"
                                 r="44" stroke-width="8"></circle>
                             <circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50"
-                                fill="transparent" r="44" stroke-dasharray="276.46" stroke-dashoffset="96.76"
+                                fill="transparent" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"
                                 stroke-linecap="round" stroke-width="8"></circle>
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span class="font-display text-[42px] font-bold text-on-surface">65%</span>
+                            <span id="progress-percent"
+                                class="font-display text-[42px] font-bold text-on-surface">0%</span>
                             <span
                                 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Overall</span>
                         </div>
@@ -265,107 +276,45 @@
                             <span class="material-symbols-outlined text-primary mb-1"
                                 style="font-size: 20px;">timer</span>
                             <span class="font-label-sm text-on-surface-variant">Remaining</span>
-                            <span class="font-label-md font-bold text-on-surface">2m 15s</span>
+                            <span id="metric-remaining" class="font-label-md font-bold text-on-surface">~25s</span>
                         </div>
-                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
+                        <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl text-center">
                             <span class="material-symbols-outlined text-primary mb-1"
                                 style="font-size: 20px;">neurology</span>
-                            <span class="font-label-sm text-on-surface-variant">LLM Model</span>
-                            <span class="font-label-md font-bold text-on-surface">GPT-4o</span>
+                            <span class="font-label-sm text-on-surface-variant block">LLM Model</span>
+                            <span class="font-label-md font-bold text-on-surface capitalize text-xs">{{
+                                params.provider|default:"Dummy" }} ({{ params.model|default:"Default" }})</span>
                         </div>
                         <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
                             <span class="material-symbols-outlined text-primary mb-1"
                                 style="font-size: 20px;">image</span>
                             <span class="font-label-sm text-on-surface-variant">Visuals</span>
-                            <span class="font-label-md font-bold text-on-surface">DALL-E 3</span>
+                            <span class="font-label-md font-bold text-on-surface">Dummy</span>
                         </div>
                         <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
                             <span class="material-symbols-outlined text-primary mb-1"
                                 style="font-size: 20px;">notes</span>
                             <span class="font-label-sm text-on-surface-variant">Word Count</span>
-                            <span class="font-label-md font-bold text-on-surface">1,240</span>
+                            <span id="metric-words" class="font-label-md font-bold text-on-surface">-</span>
                         </div>
                         <div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl">
                             <span class="material-symbols-outlined text-primary mb-1"
                                 style="font-size: 20px;">photo_library</span>
                             <span class="font-label-sm text-on-surface-variant">Images</span>
-                            <span class="font-label-md font-bold text-on-surface">4 / 6</span>
+                            <span id="metric-images" class="font-label-md font-bold text-on-surface">-</span>
                         </div>
                     </div>
                 </div>
-                <!-- Pipeline Steps -->
+                <!-- Pipeline Stages -->
                 <div class="p-lg">
                     <h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-md">
                         Generation Pipeline</h3>
-                    <div class="space-y-sm">
-                        <!-- Step: Completed -->
-                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
-                                <span class="material-symbols-outlined text-[18px]"
-                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Understanding
-                                Topic &amp; Intent</span>
-                        </div>
-                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
-                                <span class="material-symbols-outlined text-[18px]"
-                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Researching
-                                Competitive Content</span>
-                        </div>
-                        <div class="flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
-                                <span class="material-symbols-outlined text-[18px]"
-                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant line-through opacity-60">Creating
-                                Semantic Outline</span>
-                        </div>
-                        <!-- Step: In Progress -->
-                        <div class="flex items-center gap-md p-sm bg-primary/5 border border-primary/20 rounded-lg">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary relative">
-                                <span class="material-symbols-outlined animate-spin"
-                                    style="font-size: 18px;">progress_activity</span>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-label-md font-bold text-on-surface">Generating AI Hero Images</span>
-                                <span class="font-label-sm text-primary text-[11px] uppercase font-bold">In
-                                    Progress...</span>
-                            </div>
-                        </div>
-                        <!-- Steps: Pending -->
-                        <div class="flex items-center gap-md p-sm opacity-40">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant">Structuring Data Tables &amp;
-                                Comparisons</span>
-                        </div>
-                        <div class="flex items-center gap-md p-sm opacity-40">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant">Optimizing for Search Intent
-                                (SEO)</span>
-                        </div>
-                        <div class="flex items-center gap-md p-sm opacity-40">
-                            <div
-                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
-                            </div>
-                            <span class="font-label-md text-on-surface-variant">Final Rendering &amp; Export</span>
-                        </div>
+                    <div id="pipeline-steps" class="space-y-sm">
+                        <!-- Populated dynamically by script -->
                     </div>
                 </div>
             </div>
+
             <!-- Console Activity Feed -->
             <div class="bg-[#1e1e1e] rounded-xl p-md shadow-lg overflow-hidden border border-[#333]">
                 <div class="flex items-center gap-xs mb-md border-b border-[#333] pb-2">
@@ -375,30 +324,18 @@
                     <span class="text-[10px] text-white/40 uppercase ml-md font-mono tracking-widest">Live Activity
                         Log</span>
                 </div>
-                <div class="font-mono text-[13px] space-y-1.5 h-32 overflow-y-auto custom-scrollbar">
-                    <p class="text-green-400"><span class="text-white/30">[14:22:10]</span> SUCCESS: Semantic outline
-                        created with 8 H2 headings.</p>
-                    <p class="text-green-400"><span class="text-white/30">[14:22:45]</span> SUCCESS: Content draft
-                        generated (1,240 words).</p>
-                    <p class="text-white/80"><span class="text-white/30">[14:23:02]</span> INFO: Initiating Image
-                        Generation via DALL-E 3...</p>
-                    <p class="text-blue-400"><span class="text-white/30">[14:23:15]</span> TASK: Generating Hero Image 1
-                        of 6: "Modern Workspace Architecture"</p>
-                    <p class="text-blue-400"><span class="text-white/30">[14:23:42]</span> TASK: Generating Detail Image
-                        2 of 6: "Neural Network Visualization"</p>
-                    <p class="text-green-400"><span class="text-white/30">[14:24:05]</span> SUCCESS: Image 1 and 2
-                        uploaded to CDN.</p>
-                    <p class="text-blue-400 animate-pulse"><span class="text-white/30">[14:24:12]</span> TASK:
-                        Generating Content Image 3 of 6...</p>
+                <div class="font-mono text-[13px] space-y-1.5 h-32 overflow-y-auto custom-scrollbar text-white/80">
+                    <!-- Populated dynamically -->
                 </div>
             </div>
+
             <!-- Action Footer -->
             <div class="mt-lg flex items-center justify-center gap-md">
-                <button
+                <button onclick="window.location.href='{% url 'generator:generator' %}'"
                     class="px-lg py-md text-primary font-label-md hover:bg-primary/5 rounded-xl transition-all border border-transparent hover:border-primary/20">
                     Cancel Generation
                 </button>
-                <button
+                <button onclick="window.location.href='{% url 'dashboard:dashboard' %}'"
                     class="px-xl py-md accent-gradient text-white font-label-md rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-sm">
                     <span class="material-symbols-outlined text-[18px]">tab</span>
                     Run in Background
@@ -406,16 +343,14 @@
             </div>
         </div>
     </main>
-    <!-- Floating Atmosphere -->
-    <div class="fixed top-0 right-0 -z-10 w-1/2 h-full opacity-30 pointer-events-none">
-        <div
-            class="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse">
-        </div>
-        <div class="absolute bottom-[20%] right-[30%] w-[300px] h-[300px] bg-secondary/10 rounded-full blur-[100px]">
-        </div>
-    </div>
+
     <script>
-        // Micro-interaction for circular progress
+        // Setup configuration parameters
+        const configEl = document.getElementById('generation-config');
+        const csrfToken = configEl.getAttribute('data-csrf');
+        const generateUrl = configEl.getAttribute('data-generate-url');
+
+        // Circular progress ring formula
         const circle = document.querySelector('.progress-ring__circle');
         const radius = circle.r.baseVal.value;
         const circumference = radius * 2 * Math.PI;
@@ -426,16 +361,189 @@
         function setProgress(percent) {
             const offset = circumference - (percent / 100 * circumference);
             circle.style.strokeDashoffset = offset;
+            document.getElementById('progress-percent').innerText = `${Math.round(percent)}%`;
         }
 
-        // Initialize progress at 65%
-        setTimeout(() => setProgress(65), 500);
+        // Logger helper
+        const logContainer = document.querySelector('.font-mono');
+        function addLog(message, type = 'info') {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            const p = document.createElement('p');
+            if (type === 'success') {
+                p.className = 'text-green-400';
+                p.innerHTML = `<span class="text-white/30">[${timeStr}]</span> SUCCESS: ${message}`;
+            } else if (type === 'error') {
+                p.className = 'text-red-400';
+                p.innerHTML = `<span class="text-white/30">[${timeStr}]</span> ERROR: ${message}`;
+            } else if (type === 'task') {
+                p.className = 'text-blue-400';
+                p.innerHTML = `<span class="text-white/30">[${timeStr}]</span> TASK: ${message}`;
+            } else {
+                p.className = 'text-white/80';
+                p.innerHTML = `<span class="text-white/30">[${timeStr}]</span> INFO: ${message}`;
+            }
+            logContainer.appendChild(p);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
 
-        // Simple activity log auto-scroll
-        const log = document.querySelector('.font-mono');
-        setInterval(() => {
-            log.scrollTop = log.scrollHeight;
-        }, 3000);
+        // Pipeline progress steps
+        const stages = [
+            { text: "Understanding Topic & Intent", elapsed: 500 },
+            { text: "Researching Competitive Content", elapsed: 1500 },
+            { text: "Creating Semantic Outline", elapsed: 3000 },
+            { text: "Generating AI Rich Text Sections", elapsed: 6000 },
+            { text: "Generating AI Hero Images", elapsed: 9000 },
+            { text: "Final Rendering & Export", elapsed: 12000 }
+        ];
+
+        const stepsContainer = document.getElementById('pipeline-steps');
+
+        function renderStages(activeIdx) {
+            stepsContainer.innerHTML = '';
+            stages.forEach((stage, idx) => {
+                const div = document.createElement('div');
+                if (idx < activeIdx) {
+                    // Completed
+                    div.className = 'flex items-center gap-md p-sm bg-surface-container-lowest/50 rounded-lg';
+                    div.innerHTML = `
+                        <div class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        </div>
+                        <span class="font-label-md text-on-surface-variant line-through opacity-60">${stage.text}</span>
+                    `;
+                } else if (idx === activeIdx) {
+                    // In Progress
+                    div.className = 'flex items-center gap-md p-sm bg-primary/5 border border-primary/20 rounded-lg';
+                    div.innerHTML = `
+                        <div class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary relative">
+                            <span class="material-symbols-outlined animate-spin" style="font-size: 18px;">progress_activity</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-label-md font-bold text-on-surface">${stage.text}</span>
+                            <span class="font-label-sm text-primary text-[11px] uppercase font-bold">In Progress...</span>
+                        </div>
+                    `;
+                } else {
+                    // Pending
+                    div.className = 'flex items-center gap-md p-sm opacity-40';
+                    div.innerHTML = `
+                        <div class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+                        </div>
+                        <span class="font-label-md text-on-surface-variant">${stage.text}</span>
+                    `;
+                }
+                stepsContainer.appendChild(div);
+            });
+        }
+
+        let currentPercent = 0;
+        let activeStep = 0;
+        let pipelineDone = false;
+        let secondsRemaining = 25;
+
+        // Smooth countdown of remaining time
+        const timerInterval = setInterval(() => {
+            if (pipelineDone) return;
+            if (secondsRemaining > 1) {
+                secondsRemaining -= 1;
+                document.getElementById('metric-remaining').innerText = `${secondsRemaining}s`;
+            }
+        }, 1000);
+
+        // Smooth increment of overall percentage
+        const progressInterval = setInterval(() => {
+            if (pipelineDone) return;
+            if (currentPercent < 95) {
+                currentPercent += 1;
+                setProgress(currentPercent);
+            }
+        }, 200);
+
+        // Transition through stages
+        stages.forEach((stage, idx) => {
+            setTimeout(() => {
+                if (pipelineDone) return;
+                activeStep = idx;
+                renderStages(activeStep);
+                addLog(`Running stage: ${stage.text}...`, 'task');
+
+                // Update metrics dynamically as steps progress
+                if (idx === 3) {
+                    document.getElementById('metric-words').innerText = "Generating...";
+                } else if (idx === 4) {
+                    document.getElementById('metric-words').innerText = "1,150";
+                    document.getElementById('metric-images').innerText = "Creating...";
+                } else if (idx === 5) {
+                    document.getElementById('metric-images').innerText = "3 / 3";
+                }
+            }, stage.elapsed);
+        });
+
+        // Initialize state
+        renderStages(0);
+        addLog("Initializing Generation Pipeline...", "info");
+        setProgress(0);
+
+        // Trigger AJAX POST Generation
+        fetch(generateUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.message || 'Generation failed.');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    pipelineDone = true;
+                    clearInterval(progressInterval);
+                    clearInterval(timerInterval);
+                    setProgress(100);
+                    renderStages(stages.length);
+                    document.getElementById('metric-remaining').innerText = "0s";
+                    addLog("Blog successfully generated!", "success");
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url;
+                    }, 1000);
+                } else {
+                    throw new Error(data.message || 'Unknown generation error.');
+                }
+            })
+            .catch(err => {
+                pipelineDone = true;
+                clearInterval(progressInterval);
+                clearInterval(timerInterval);
+                addLog(err.message, "error");
+                showErrorState(err.message);
+            });
+
+        function showErrorState(message) {
+            const mainContainer = document.querySelector('main > div');
+            mainContainer.innerHTML = `
+                <div class="max-w-[800px] w-full mx-auto bg-surface-container-lowest border border-outline-variant/30 rounded-2xl shadow-sm p-12 text-center my-lg">
+                    <span class="material-symbols-outlined text-red-500" style="font-size: 64px; font-variation-settings: 'FILL' 1;">error</span>
+                    <h2 class="text-3xl font-black text-on-surface mt-4 mb-2">Generation Failed</h2>
+                    <p class="text-on-surface-variant text-base mb-8">${message}</p>
+                    <div class="flex gap-4 justify-center">
+                        <a href="{% url 'generator:generator' %}" class="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-secondary transition-all">
+                            Back to Generator
+                        </a>
+                        <a href="{% url 'dashboard:dashboard' %}" class="px-6 py-3 border border-outline-variant text-on-surface-variant font-bold rounded-lg hover:bg-surface-container-high transition-all">
+                            Go to Dashboard
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
     </script>
 </body>
 

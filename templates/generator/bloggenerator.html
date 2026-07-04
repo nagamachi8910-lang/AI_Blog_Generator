@@ -229,12 +229,21 @@
             <!-- Main Content Area (Split Pane) -->
             <main class="flex-1 flex overflow-hidden">
                 <!-- Left Panel: Configuration -->
-                <section class="w-[450px] flex flex-col bg-surface-container-lowest border-r border-outline-variant">
+                <form method="POST" action="{% url 'generator:generator' %}"
+                    class="w-[450px] flex flex-col bg-surface-container-lowest border-r border-outline-variant">
+                    {% csrf_token %}
                     <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-white">
                         <h1 class="text-xl font-bold text-on-background">Content Configuration</h1>
                         <span
                             class="material-symbols-outlined text-outline hover:text-primary cursor-pointer">info</span>
                     </div>
+                    {% if error %}
+                    <div
+                        class="px-6 py-3 bg-red-50 text-red-700 text-xs font-semibold border-b border-outline-variant/30 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">error</span>
+                        {{ error }}
+                    </div>
+                    {% endif %}
                     <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
                         <div class="space-y-6">
                             <!-- Basic Info -->
@@ -242,10 +251,10 @@
                                 <div>
                                     <label
                                         class="block text-sm font-semibold text-on-surface-variant mb-2">Topic</label>
-                                    <input
+                                    <input name="topic" required
                                         class="w-full rounded-lg border-outline-variant bg-surface-container-low focus:ring-primary focus:border-primary text-sm p-3"
-                                        placeholder="e.g. The Impact of Quantum Computing on Cybersecurity"
-                                        type="text" />
+                                        placeholder="e.g. The Impact of Quantum Computing on Cybersecurity" type="text"
+                                        value="{{ topic|default:'' }}" />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-on-surface-variant mb-2">Content
@@ -310,12 +319,31 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-on-surface-variant mb-2">Tone</label>
-                                    <select
+                                    <select name="tone"
                                         class="w-full rounded-lg border-outline-variant bg-surface-container-low text-sm p-2.5">
-                                        <option>Professional</option>
-                                        <option>Casual</option>
-                                        <option>Witty</option>
-                                        <option>Empathetic</option>
+                                        <option value="Professional">Professional</option>
+                                        <option value="Casual">Casual</option>
+                                        <option value="Witty">Witty</option>
+                                        <option value="Empathetic">Empathetic</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-on-surface-variant mb-2">AI
+                                        Provider</label>
+                                    <select name="provider"
+                                        class="w-full rounded-lg border-outline-variant bg-surface-container-low text-sm p-2.5">
+                                        <option value="dummy">Dummy / Mock</option>
+                                        <option value="gemini">Google Gemini</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-on-surface-variant mb-2">AI
+                                        Model</label>
+                                    <select name="model"
+                                        class="w-full rounded-lg border-outline-variant bg-surface-container-low text-sm p-2.5">
+                                        <option value="default">Default Model</option>
+                                        <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                                        <option value="gemini-2.5-pro">gemini-2.5-pro</option>
                                     </select>
                                 </div>
                             </div>
@@ -404,17 +432,17 @@
                     </div>
                     <!-- Bottom Actions -->
                     <div class="p-6 bg-surface-container-low border-t border-outline-variant flex gap-3">
-                        <button
+                        <button type="submit"
                             class="flex-1 bg-primary text-white font-bold py-3 rounded-lg hover:bg-secondary transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
                             <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
                             Generate Blog
                         </button>
-                        <button
+                        <button type="reset"
                             class="px-6 border-2 border-outline text-on-surface-variant font-bold rounded-lg hover:bg-surface-container-high transition-all">
                             Reset
                         </button>
                     </div>
-                </section>
+                </form>
                 <!-- Right Panel: Live Preview -->
                 <section class="flex-1 flex flex-col bg-surface-container relative overflow-hidden">
                     <!-- Subtle background decoration -->
@@ -530,37 +558,7 @@
             });
         });
 
-        // Mock "Generate" action
-        const generateBtn = document.querySelector('button.bg-primary');
-        generateBtn.addEventListener('click', () => {
-            const status = document.querySelector('.bg-success\\/10');
-            status.innerHTML = `
-                <span class="relative flex h-2 w-2">
-                    <span class="status-pulse absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                Status: Generating...
-            `;
-            status.classList.remove('text-emerald-600', 'bg-success/10', 'border-emerald-100');
-            status.classList.add('text-primary', 'bg-primary/10', 'border-primary/20');
-
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> Thinking...`;
-
-            setTimeout(() => {
-                status.innerHTML = `
-                    <span class="relative flex h-2 w-2">
-                        <span class="status-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    Status: Ready
-                `;
-                status.classList.add('text-emerald-600', 'bg-success/10', 'border-emerald-100');
-                status.classList.remove('text-primary', 'bg-primary/10', 'border-primary/20');
-                generateBtn.disabled = false;
-                generateBtn.innerHTML = `<span class="material-symbols-outlined text-[20px]">auto_awesome</span> Generate Blog`;
-            }, 3000);
-        });
+        // Mock generation click handler removed to allow natural form submission
     </script>
 </body>
 

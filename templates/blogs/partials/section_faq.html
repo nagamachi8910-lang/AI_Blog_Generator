@@ -1,0 +1,27 @@
+{% if heading %}
+<h3 class="blog-section-faq-heading text-lg font-bold text-gray-800 mt-6 mb-2">{{ heading }}</h3>
+{% endif %}
+<div class="blog-section-faq-list space-y-4 my-6">
+    {% for item in faq_items %}
+    <div class="blog-faq-item border border-gray-200 rounded-md p-4 bg-gray-50 bg-opacity-30">
+        {% if item.question %}
+        <h4 class="blog-faq-question font-bold text-gray-900 mb-1 text-sm">Q: {{ item.question }}</h4>
+        {% endif %}
+        {% if item.answer %}
+        <p class="blog-faq-answer text-sm text-gray-700 leading-relaxed">A: {{ item.answer }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% if images %}
+<div class="blog-section-images my-6 flex flex-wrap gap-4 justify-center">
+    {% for img in images %}
+    <div class="blog-image-wrapper border rounded-lg shadow-sm bg-white p-2">
+        <img src="{{ img.image.url }}" alt="{{ img.prompt }}" class="rounded-md max-w-full h-auto">
+        {% if img.prompt %}
+        <p class="text-xs text-gray-400 mt-2 text-center">{{ img.prompt }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

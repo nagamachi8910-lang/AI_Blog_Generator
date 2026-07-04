@@ -108,6 +108,10 @@ else:
     }
 
 
+# Custom User Model
+AUTH_USER_MODEL = "accounts.User"
+
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -139,6 +143,11 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -148,3 +157,55 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # Media files (uploaded/generated user content)
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Supabase Configuration
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY")
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+SUPABASE_JWKS_URL = os.getenv("SUPABASE_JWKS_URL")
+
+try:
+    SUPABASE_JWKS_CACHE_TIMEOUT = int(os.getenv("SUPABASE_JWKS_CACHE_TIMEOUT", "300"))
+except ValueError:
+    SUPABASE_JWKS_CACHE_TIMEOUT = 300
+
+try:
+    SUPABASE_JWT_LEEWAY = int(os.getenv("SUPABASE_JWT_LEEWAY", "10"))
+except ValueError:
+    SUPABASE_JWT_LEEWAY = 10
+
+# Gemini AI Configuration
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_DEFAULT_MODEL = os.getenv("GEMINI_DEFAULT_MODEL", "gemini-2.5-flash")
+
+try:
+    GEMINI_MAX_RETRIES = int(os.getenv("GEMINI_MAX_RETRIES", "3"))
+except ValueError:
+    GEMINI_MAX_RETRIES = 3
+
+try:
+    GEMINI_RETRY_DELAY = float(os.getenv("GEMINI_RETRY_DELAY", "2.0"))
+except ValueError:
+    GEMINI_RETRY_DELAY = 2.0
+
+try:
+    GEMINI_TIMEOUT = float(os.getenv("GEMINI_TIMEOUT", "30.0"))
+except ValueError:
+    GEMINI_TIMEOUT = 30.0
+
+
+# Startup Configuration Validation
+from django.core.exceptions import ImproperlyConfigured
+
+if not SUPABASE_URL:
+    raise ImproperlyConfigured("SUPABASE_URL environment variable is missing.")
+if not SUPABASE_URL.startswith(("http://", "https://")):
+    raise ImproperlyConfigured("SUPABASE_URL must start with http:// or https://")
+if not SUPABASE_ANON_KEY:
+    raise ImproperlyConfigured("SUPABASE_ANON_KEY environment variable is missing.")
+if not SUPABASE_SERVICE_ROLE_KEY:
+    raise ImproperlyConfigured("SUPABASE_SERVICE_ROLE_KEY environment variable is missing.")
+if not SUPABASE_JWKS_URL:
+    raise ImproperlyConfigured("SUPABASE_JWKS_URL environment variable is missing.")
+
+

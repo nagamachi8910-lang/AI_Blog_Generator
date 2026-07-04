@@ -1,0 +1,19 @@
+<blockquote
+    class="blog-section-quote border-l-4 border-indigo-500 pl-4 py-2 my-6 italic text-gray-700 bg-indigo-50 bg-opacity-25 rounded-r-md">
+    <p class="mb-2 text-md leading-relaxed">{{ content }}</p>
+    {% if heading %}
+    <cite class="text-sm font-semibold text-gray-500 block">— {{ heading }}</cite>
+    {% endif %}
+</blockquote>
+{% if images %}
+<div class="blog-section-images my-6 flex flex-wrap gap-4 justify-center">
+    {% for img in images %}
+    <div class="blog-image-wrapper border rounded-lg shadow-sm bg-white p-2">
+        <img src="{{ img.image.url }}" alt="{{ img.prompt }}" class="rounded-md max-w-full h-auto">
+        {% if img.prompt %}
+        <p class="text-xs text-gray-400 mt-2 text-center">{{ img.prompt }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

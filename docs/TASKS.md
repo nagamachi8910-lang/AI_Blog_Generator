@@ -87,11 +87,11 @@
 
 ## 3.1 Supabase Authentication
 
-- [ ] Connect Supabase
-- [ ] Google OAuth
-- [ ] JWT Verification
-- [ ] Create Local User
-- [ ] Session Management
+- [x] Connect Supabase
+- [x] Google OAuth
+- [x] JWT Verification
+- [x] Create Local User
+- [x] Session Management
 
 ---
 
@@ -108,6 +108,7 @@
 
 ## 4.1 Blog CRUD
 
+- [x] Blog Data Model
 - [ ] Create Blog
 - [ ] Read Blog
 - [ ] Edit Blog
@@ -128,31 +129,31 @@
 
 ## 5.1 Prompt Builder
 
-- [ ] Build Prompt
-- [ ] Topic Validation
-- [ ] SEO Prompt
-- [ ] Tone Selection
+- [x] Build Prompt
+- [x] Topic Validation
+- [x] SEO Prompt
+- [x] Tone Selection
 
 ---
 
 ## 5.2 LLM Integration
 
-- [ ] Connect Gemini
+- [x] Connect Gemini
 - [ ] Connect OpenRouter
-- [ ] Model Selection
-- [ ] Error Handling
+- [x] Model Selection
+- [x] Error Handling
 
 ---
 
 ## 5.3 Rich Content
 
-- [ ] Headings
-- [ ] Lists
-- [ ] Tables
-- [ ] Code Blocks
-- [ ] Quotes
-- [ ] FAQs
-- [ ] Summary
+- [x] Headings
+- [x] Lists
+- [x] Tables
+- [x] Code Blocks
+- [x] Quotes
+- [x] FAQs
+- [x] Summary
 
 ---
 
@@ -160,14 +161,22 @@
 
 ## 6.1 Image Pipeline
 
-- [ ] Generate Prompt
-- [ ] Generate Image
-- [ ] Save Image
-- [ ] Associate with Blog
+- [x] Generate Prompt
+- [x] Generate Image
+- [x] Save Image
+- [x] Associate with Blog
+
+## 6.2 Blog Rendering Engine
+
+- [x] Reusable Template Partials
+- [x] Table Parser Module
+- [x] Renderer Registry & Subclasses
+- [x] Automatic Associated Image Resolution
+- [x] Render Descriptor Output
 
 ---
 
-## 6.2 Image Management
+## 6.3 Image Management
 
 - [ ] Regenerate Image
 - [ ] Delete Image

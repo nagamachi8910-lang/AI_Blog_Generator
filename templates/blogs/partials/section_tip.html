@@ -1,0 +1,22 @@
+<div
+    class="blog-section-tip flex items-start gap-4 p-4 my-6 bg-emerald-50 bg-opacity-40 border border-emerald-250 rounded-md text-emerald-800 shadow-xs">
+    <span class="blog-section-tip-icon text-xl select-none">💡</span>
+    <div>
+        {% if heading %}
+        <h4 class="font-bold text-emerald-900 mb-1 text-sm">{{ heading }}</h4>
+        {% endif %}
+        <p class="text-sm leading-relaxed text-emerald-950">{{ content }}</p>
+    </div>
+</div>
+{% if images %}
+<div class="blog-section-images my-6 flex flex-wrap gap-4 justify-center">
+    {% for img in images %}
+    <div class="blog-image-wrapper border rounded-lg shadow-sm bg-white p-2">
+        <img src="{{ img.image.url }}" alt="{{ img.prompt }}" class="rounded-md max-w-full h-auto">
+        {% if img.prompt %}
+        <p class="text-xs text-gray-400 mt-2 text-center">{{ img.prompt }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

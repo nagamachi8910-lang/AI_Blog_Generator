@@ -209,7 +209,8 @@
                 </button>
                 <div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
                     <div class="text-right hidden sm:block">
-                        <p class="font-label-md text-on-surface leading-tight">Alex Sterling</p>
+                        <p class="font-label-md text-on-surface leading-tight">{{
+                            request.user.username|default:request.user.email }}</p>
                         <p class="font-label-sm text-on-surface-variant opacity-70">Pro Plan</p>
                     </div>
                     <div class="w-10 h-10 rounded-full border-2 border-primary/20 bg-primary-container overflow-hidden">
@@ -229,11 +230,11 @@
                     <p class="font-body-md text-on-surface-variant">Welcome back! Here's what's happening with your
                         content today.</p>
                 </div>
-                <button
+                <a href="{% url 'generator:generator' %}"
                     class="accent-gradient text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-md">
                     <span class="material-symbols-outlined">add</span>
                     <span>Generate Blog</span>
-                </button>
+                </a>
             </section>
             <!-- Metrics Row -->
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -244,11 +245,23 @@
                         <div class="p-2 bg-primary-fixed rounded-lg">
                             <span class="material-symbols-outlined text-on-primary-fixed">description</span>
                         </div>
-                        <span class="text-tertiary font-label-sm">+12% vs last month</span>
                     </div>
                     <div>
                         <p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Blogs Generated</p>
-                        <h3 class="font-display text-headline-lg text-on-surface mt-1">124</h3>
+                        <h3 class="font-display text-headline-lg text-on-surface mt-1">{{ total_blogs }}</h3>
+                        <div class="flex flex-wrap gap-2 mt-2 text-xs text-on-surface-variant">
+                            <span
+                                class="px-1.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded">Pub:
+                                {{ published_blogs }}</span>
+                            <span
+                                class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded">Draft:
+                                {{ draft_blogs }}</span>
+                            {% if failed_blogs > 0 %}
+                            <span
+                                class="px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded">Failed:
+                                {{ failed_blogs }}</span>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 <!-- Images Generated -->
@@ -258,11 +271,10 @@
                         <div class="p-2 bg-secondary-fixed rounded-lg">
                             <span class="material-symbols-outlined text-on-secondary-fixed">image</span>
                         </div>
-                        <span class="text-tertiary font-label-sm">+5% vs last month</span>
                     </div>
                     <div>
                         <p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Images Generated</p>
-                        <h3 class="font-display text-headline-lg text-on-surface mt-1">850</h3>
+                        <h3 class="font-display text-headline-lg text-on-surface mt-1">{{ total_images }}</h3>
                     </div>
                 </div>
                 <!-- AI Credits -->
@@ -318,94 +330,49 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-outline-variant/20">
+                                {% for blog in recent_blogs %}
                                 <tr class="hover:bg-surface-container-lowest transition-colors">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-3">
                                             <div
-                                                class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center">
+                                                class="w-10 h-10 rounded {% cycle 'bg-primary-fixed' 'bg-secondary-fixed' 'bg-tertiary-fixed' %} flex items-center justify-center">
                                                 <span
                                                     class="material-symbols-outlined text-on-primary-fixed">article</span>
                                             </div>
-                                            <span class="font-body-md text-on-surface font-medium">The Future of
-                                                Generative AI in 2025</span>
+                                            <a href="{% url 'blogs:detail' slug=blog.slug %}" class="hover:underline">
+                                                <span class="font-body-md text-on-surface font-medium">{{ blog.title
+                                                    }}</span>
+                                            </a>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
+                                        {% if blog.status == 'published' %}
                                         <span
                                             class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-wider">Published</span>
-                                    </td>
-                                    <td class="px-6 py-4 font-label-md text-on-surface-variant">Oct 24, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button class="p-2 hover:text-primary transition-colors"><span
-                                                class="material-symbols-outlined">more_vert</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-surface-container-lowest transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded bg-secondary-fixed flex items-center justify-center">
-                                                <span
-                                                    class="material-symbols-outlined text-on-secondary-fixed">article</span>
-                                            </div>
-                                            <span class="font-body-md text-on-surface font-medium">Designing Minimalist
-                                                Interfaces</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
+                                        {% elif blog.status == 'failed' %}
                                         <span
-                                            class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-xs font-bold uppercase tracking-wider">Draft</span>
-                                    </td>
-                                    <td class="px-6 py-4 font-label-md text-on-surface-variant">Oct 22, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button class="p-2 hover:text-primary transition-colors"><span
-                                                class="material-symbols-outlined">more_vert</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-surface-container-lowest transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded bg-tertiary-fixed flex items-center justify-center">
-                                                <span
-                                                    class="material-symbols-outlined text-on-tertiary-fixed">article</span>
-                                            </div>
-                                            <span class="font-body-md text-on-surface font-medium">Modern Tech Trends
-                                                for SaaS Founders</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
+                                            class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-xs font-bold uppercase tracking-wider">Failed</span>
+                                        {% else %}
                                         <span
-                                            class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-wider">Published</span>
+                                            class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-xs font-bold uppercase tracking-wider">{{
+                                            blog.get_status_display }}</span>
+                                        {% endif %}
                                     </td>
-                                    <td class="px-6 py-4 font-label-md text-on-surface-variant">Oct 19, 2024</td>
+                                    <td class="px-6 py-4 font-label-md text-on-surface-variant">{{
+                                        blog.created_at|date:"M d, Y" }}</td>
                                     <td class="px-6 py-4 text-right">
-                                        <button class="p-2 hover:text-primary transition-colors"><span
-                                                class="material-symbols-outlined">more_vert</span></button>
+                                        <a href="{% url 'blogs:detail' slug=blog.slug %}"
+                                            class="text-primary hover:underline font-label-md">View</a>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-surface-container-lowest transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center">
-                                                <span
-                                                    class="material-symbols-outlined text-on-primary-fixed">article</span>
-                                            </div>
-                                            <span class="font-body-md text-on-surface font-medium">Why Speed Matters in
-                                                Blog Generation</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-wider">Published</span>
-                                    </td>
-                                    <td class="px-6 py-4 font-label-md text-on-surface-variant">Oct 15, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button class="p-2 hover:text-primary transition-colors"><span
-                                                class="material-symbols-outlined">more_vert</span></button>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4"
+                                        class="px-6 py-8 text-center text-on-surface-variant/60 font-body-md">
+                                        No blogs generated yet. Click "Generate Blog" to start.
                                     </td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

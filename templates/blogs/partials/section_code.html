@@ -1,0 +1,17 @@
+{% if heading %}
+<div class="blog-section-code-header text-sm font-mono text-gray-500 mt-6 mb-1">{{ heading }}</div>
+{% endif %}
+<pre class="blog-section-code-block bg-gray-950 text-gray-100 p-4 rounded-md font-mono text-sm leading-relaxed overflow-x-auto my-4"
+    data-language="{{ language }}"><code>{{ content }}</code></pre>
+{% if images %}
+<div class="blog-section-images my-6 flex flex-wrap gap-4 justify-center">
+    {% for img in images %}
+    <div class="blog-image-wrapper border rounded-lg shadow-sm bg-white p-2">
+        <img src="{{ img.image.url }}" alt="{{ img.prompt }}" class="rounded-md max-w-full h-auto">
+        {% if img.prompt %}
+        <p class="text-xs text-gray-400 mt-2 text-center">{{ img.prompt }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

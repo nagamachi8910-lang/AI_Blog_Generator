@@ -194,9 +194,14 @@
     <main class="pt-20">
         <!-- Hero Section -->
         <header class="w-full h-[614px] relative overflow-hidden">
+            {% if blog.cover_image %}
+            <img class="w-full h-full object-cover" src="{{ blog.cover_image.image.url }}"
+                alt="{{ blog.cover_image.prompt|default:'Blog Cover Image' }}" />
+            {% else %}
             <img class="w-full h-full object-cover"
                 data-alt="A cinematic, high-resolution wide shot of a sleek robotic hand interacting with a glowing holographic interface in a sun-drenched, minimalist studio. Soft dust particles dance in the warm morning light. The color palette is dominated by airy whites, deep indigos, and soft lavenders, creating a serene and premium technological atmosphere."
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjNjoJY8q3bfTdPJ8Ih8Fy1PXei7GbD1s95bZ7axTCZrq5haMVkqRs51Y6v9tdpzyu8KwIzTgQ5ZXYUNQ_0HmqYHH7R8k8lna1nJPsTuI0DB4qK064ZZ4nhjYlFV6MdQrLY_FTN7w6afuvTDanPf__470C1b4WUkoSDez9pGh_BcxQGDmsyDLX3_7R1oeQRbj83Q_kVr83NVDrYaX76dOZpXZRaHvjwTx33FRFkeXtcQqoMj_F9h573w" />
+            {% endif %}
             <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
         </header>
         <div
@@ -208,16 +213,14 @@
                     <h4 class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-md">Table of
                         Contents</h4>
                     <ul class="space-y-sm">
-                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all toc-active"
-                                href="#introduction">Introduction</a></li>
-                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
-                                href="#mechanics">The Mechanics of Synthesis</a></li>
-                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
-                                href="#data-viz">Comparative Efficiency</a></li>
-                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
-                                href="#ethics">Ethical Frameworks</a></li>
-                        <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all px-0"
-                                href="#conclusion">Final Insights</a></li>
+                        {% for item in toc %}
+                        <li>
+                            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary block transition-all {% if forloop.first %}toc-active{% endif %}"
+                                href="#sec-{{ item.id }}">{{ item.title }}</a>
+                        </li>
+                        {% empty %}
+                        <li class="text-sm text-gray-400 font-label-md">No headings</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </aside>
@@ -227,24 +230,22 @@
                 <!-- Article Header -->
                 <div class="mb-xl">
                     <div class="flex items-center gap-xs mb-sm">
-                        <span
-                            class="bg-primary/10 text-primary px-sm py-1 rounded-full font-label-sm text-label-sm">Generative
-                            Intelligence</span>
-                        <span class="text-on-surface-variant text-label-sm">• 12 min read</span>
+                        <span class="bg-primary/10 text-primary px-sm py-1 rounded-full font-label-sm text-label-sm">AI
+                            Blog</span>
+                        <span class="text-on-surface-variant text-label-sm">• {{ reading_time }} min read</span>
                     </div>
-                    <h1 class="font-display text-display text-on-background mb-md leading-[1.1]">The Future of
-                        Generative Synthesis: A New Paradigm</h1>
+                    <h1 class="font-display text-display text-on-background mb-md leading-[1.1]">{{ blog.title }}</h1>
                     <div class="flex items-center justify-between py-md border-y border-outline-variant/30">
                         <div class="flex items-center gap-sm">
                             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed">
-                                <img class="w-full h-full object-cover"
-                                    data-alt="A professional headshot of a woman with a confident smile, wearing minimalist glasses and a dark blazer. The background is a clean, softly blurred modern office interior with neutral tones and natural light. High-end editorial photography style."
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdBkepovFu4XI75LkpAhPlNcyWCMMrbaF-n_IPQn7UwAxC9tLFjzCEkyhangE47EfW2SxegxEv1sw5tlhhkXkwUVnCAb0RET7OgTv9BTcItH2EElGUSUUJ3JiUiW5Uz9uaBOzrC6c6y0Em0a3v2qGexEkytKeCxj2WNwFox25GZXxN25Avyx41_oSZZA6-7Bi-raLlJxPSa0N2y8efbgDfFsY8AIwB5AiOJZMJpczbVAVbbGfjjqF4sg" />
+                                <img class="w-full h-full object-cover" data-alt="User Avatar"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4Iyx2UgyqNFRneb8rBJdbpQYV48QqPGef6XiiCy7hDbO30Z2LWjl_pgeJ5Pki6c5iHuAlcNWe8UL4xB03kaSgHab8Sg_x6W-l3XBiVyMDuxadk5vetpJ_HsujsyBrMaHCbZF3yRO4KqfD32R4YTab-kKIMTUW9NyDrQTTGxJKQE6enKCYuR-WSAa2oJKLHwMIzganONCPuS2MP75QExs-i1vH_yBeZVcR_oeBGpTImzb60wRDLYxY5Q" />
                             </div>
                             <div>
-                                <p class="font-label-md text-label-md text-on-background">Dr. Elena Vance</p>
-                                <p class="font-label-sm text-label-sm text-on-surface-variant">Chief AI Architect • Oct
-                                    24, 2024</p>
+                                <p class="font-label-md text-label-md text-on-background">{{
+                                    blog.author.username|default:blog.author.email }}</p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Author • {{
+                                    blog.created_at|date:"M d, Y" }}</p>
                             </div>
                         </div>
                         <div class="flex gap-xs">
@@ -258,151 +259,11 @@
                     </div>
                 </div>
                 <!-- Article Body -->
-                <div class="prose-custom font-body-lg text-body-lg selection-highlight">
-                    <p class="first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left"
-                        id="introduction">
-                        Generative AI has transcended the initial novelty phase. We are now entering an era of
-                        "Synthesis," where the focus shifts from mere content generation to deep structural integration
-                        within professional workflows. This transition marks a fundamental change in how we perceive the
-                        relationship between human intuition and algorithmic precision.
-                    </p>
-                    <!-- Tip Callout -->
-                    <div class="my-lg p-md bg-tertiary-fixed/30 border-l-4 border-tertiary rounded-r-xl flex gap-md">
-                        <span class="material-symbols-outlined text-tertiary">lightbulb</span>
-                        <div>
-                            <p class="font-label-md text-label-md text-tertiary font-bold mb-1">Expert Tip</p>
-                            <p class="text-body-md font-body-md text-on-tertiary-fixed-variant m-0">Synthesis is most
-                                effective when user prompts focus on 'constraints' rather than 'outcomes'. Define the
-                                boundaries to unleash the model's creative logic.</p>
-                        </div>
-                    </div>
-                    <h2 id="mechanics">The Mechanics of Synthesis</h2>
-                    <p>
-                        To understand synthesis, we must look at the underlying transformers. Unlike earlier models that
-                        relied on rigid pattern matching, modern architectures utilize multi-layered attention
-                        mechanisms that simulate contextual awareness.
-                    </p>
-                    <!-- Code Block -->
-                    <div class="my-lg rounded-xl overflow-hidden bg-on-background shadow-lg">
-                        <div
-                            class="bg-surface-variant/10 px-md py-2 flex justify-between items-center border-b border-outline-variant/10">
-                            <span class="font-label-sm text-label-sm text-outline-variant">Aetherium_Engine.py</span>
-                            <button
-                                class="flex items-center gap-xs font-label-sm text-label-sm text-outline-variant hover:text-white transition-colors">
-                                <span class="material-symbols-outlined text-[16px]">content_copy</span> Copy
-                            </button>
-                        </div>
-                        <pre class="p-md text-primary-fixed-dim font-mono text-[14px] leading-relaxed"><code>def synthesize_context(prompt, constraints):
-    """
-    Core synthesis engine for Aetherium AI
-    """
-    attention_map = model.generate_attention(prompt)
-    filtered_output = apply_constraints(attention_map, constraints)
-    
-    return refined_synthesis(filtered_output)</code></pre>
-                    </div>
-                    <h2 id="data-viz">Comparative Efficiency</h2>
-                    <p>Our recent benchmarks show a significant reduction in hallucination rates when leveraging
-                        cross-domain synthesis models versus standard large language models.</p>
-                    <!-- Data Table -->
-                    <div class="my-lg overflow-hidden border border-outline-variant/30 rounded-xl">
-                        <table class="w-full text-left">
-                            <thead class="bg-surface-container-high">
-                                <tr>
-                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">MODEL
-                                        TYPE</th>
-                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">ACCURACY
-                                    </th>
-                                    <th class="px-md py-3 font-label-sm text-label-sm text-on-surface-variant">LATENCY
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-outline-variant/20">
-                                <tr>
-                                    <td class="px-md py-4 font-body-md text-body-md">Standard LLM</td>
-                                    <td class="px-md py-4 font-body-md text-body-md">78.4%</td>
-                                    <td class="px-md py-4 font-body-md text-body-md">420ms</td>
-                                </tr>
-                                <tr class="bg-primary/5">
-                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">
-                                        Aetherium Synthesis</td>
-                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">94.2%
-                                    </td>
-                                    <td class="px-md py-4 font-body-md text-body-md font-semibold text-primary">180ms
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-md py-4 font-body-md text-body-md">Hybrid Cluster</td>
-                                    <td class="px-md py-4 font-body-md text-body-md">86.1%</td>
-                                    <td class="px-md py-4 font-body-md text-body-md">550ms</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Warning Callout -->
-                    <div class="my-lg p-md bg-error-container/30 border-l-4 border-error rounded-r-xl flex gap-md">
-                        <span class="material-symbols-outlined text-error">warning</span>
-                        <div>
-                            <p class="font-label-md text-label-md text-error font-bold mb-1">Ethical Note</p>
-                            <p class="text-body-md font-body-md text-on-error-container m-0">Always verify generated
-                                data against primary sources during high-stakes decision making processes.</p>
-                        </div>
-                    </div>
-                    <h2 id="ethics">Ethical Frameworks</h2>
-                    <p>As we empower these models, the responsibility for ethical output remains a human prerogative.
-                        Aetherium AI implements a triple-layer safety check that prioritizes inclusivity and factual
-                        integrity above all else.</p>
-                    <figure class="my-lg">
-                        <img class="w-full rounded-2xl shadow-xl border border-outline-variant/10"
-                            data-alt="A highly detailed 3D isometric illustration of a human brain merged with glowing fiber optic circuits. The lighting is ethereal and soft, with a palette of deep indigos and brilliant cyan highlights. The composition is clean, centered, and set against a minimalist white background, conveying a high-tech premium medical or technological aesthetic."
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtg_Cwvk7l4H5nd87widzcW9dBE5zcJEBRS9tiYcw-llBjEQYunYbIItgAaWOfZq4h66RmIXbt2OXpPGg8bJQ3Gd1Y1iYzFHRyiU6w0UMfKlJxVFaw20Qg4FYOLkuD2i47cdJx50r1URO2Svlcl63K2MbWSIKcZAtQpDn-58MMVoTPoAmQhUEewYB8J8T0tdpjFz1fN9v9J31x2AZKhfSIlnYUlLMUpQD9EJM147wOZLXO8iUCI9pAJQ" />
-                        <figcaption
-                            class="mt-sm text-center font-label-sm text-label-sm text-on-surface-variant italic">Fig 1:
-                            Conceptual mapping of neural synthesis integration.</figcaption>
-                    </figure>
-                    <h2 id="conclusion">Final Insights</h2>
-                    <p>The journey towards total synthesis is ongoing. Our commitment to creating tools that amplify
-                        human potential without replacing the human spirit is what drives every line of code we write.
-                    </p>
+                <div class="prose-custom font-body-lg text-body-lg selection-highlight space-y-md">
+                    {% for rendered_content in rendered_sections %}
+                    {{ rendered_content|safe }}
+                    {% endfor %}
                 </div>
-                <!-- FAQ Section -->
-                <section class="mt-xl pt-xl border-t border-outline-variant/30">
-                    <h3 class="font-headline-lg text-headline-lg mb-lg">Common Inquiries</h3>
-                    <div class="space-y-md">
-                        <details
-                            class="group p-md bg-surface-container rounded-xl border border-outline-variant/10 cursor-pointer transition-all hover:bg-surface-container-high">
-                            <summary class="flex justify-between items-center font-label-md text-label-md list-none">
-                                How does Aetherium handle proprietary data privacy?
-                                <span
-                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-                            </summary>
-                            <p class="mt-md font-body-md text-body-md text-on-surface-variant">We utilize localized
-                                encryption and siloed data architectures to ensure that your proprietary information
-                                never enters the public training pool.</p>
-                        </details>
-                        <details
-                            class="group p-md bg-surface-container rounded-xl border border-outline-variant/10 cursor-pointer transition-all hover:bg-surface-container-high">
-                            <summary class="flex justify-between items-center font-label-md text-label-md list-none">
-                                Can I integrate this into my existing CMS?
-                                <span
-                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
-                            </summary>
-                            <p class="mt-md font-body-md text-body-md text-on-surface-variant">Yes, Aetherium provides a
-                                robust REST API and pre-built plugins for major platforms like Headless Wordpress and
-                                Contentful.</p>
-                        </details>
-                    </div>
-                </section>
-                <!-- References -->
-                <section class="mt-xl p-md bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
-                    <h4 class="font-label-sm text-label-sm text-outline uppercase mb-md">References &amp; Further
-                        Reading</h4>
-                    <ul class="space-y-xs list-decimal pl-md font-label-md text-label-md text-on-surface-variant">
-                        <li>Vance, E. (2024). <i>The Neural Bridge: Transformers in Synthesis</i>. AI Journal.</li>
-                        <li>Global Tech Council. (2023). <i>Ethical Guidelines for Generative Models</i>.</li>
-                        <li>Aetherium Engineering Documentation, v4.2.1.</li>
-                    </ul>
-                </section>
             </article>
             <!-- Right Sidebar (Metadata/Ads/Share) -->
             <aside class="hidden lg:block lg:col-span-2">
