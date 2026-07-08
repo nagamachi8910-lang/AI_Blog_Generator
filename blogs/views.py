@@ -198,6 +198,8 @@ def my_blogs(request):
 
     status = request.GET.get("status", "").strip()
 
+    sort = request.GET.get("sort", "-created_at").strip()
+
     blogs = BlogRepository.get_user_blogs(
 
         search,
@@ -205,6 +207,8 @@ def my_blogs(request):
         category,
 
         status,
+
+        sort,
 
     )
 
@@ -220,17 +224,8 @@ def my_blogs(request):
 
     page_obj = paginator.get_page(page_number)
 
-    categories = Blog.objects.filter(
-
-        is_deleted=False,
-
-    ).values_list(
-
-        "category",
-
-        flat=True,
-
-    ).distinct()
+    raw_categories = Blog.objects.filter(is_deleted=False).values_list("category", flat=True)
+    categories = sorted(list(set(c.strip() for c in raw_categories if c and c.strip())))
 
     return render(
 
@@ -247,6 +242,8 @@ def my_blogs(request):
             "selected_category": category,
 
             "selected_status": status,
+
+            "selected_sort": sort,
 
             "categories": categories,
 

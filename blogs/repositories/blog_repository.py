@@ -211,6 +211,7 @@ class BlogRepository:
         search="",
         category="",
         status="",
+        sort="-created_at",
     ):
 
         blogs = Blog.objects.filter(
@@ -241,7 +242,7 @@ class BlogRepository:
                 status=status
             )
 
-        return blogs.order_by("-created_at")
+        return blogs.order_by(sort)
 
     @staticmethod
     @transaction.atomic

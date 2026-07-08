@@ -572,6 +572,7 @@ mt-10">
             <select
 
                 name="category"
+                onchange="this.form.submit()"
 
                 class="
                 rounded-2xl
@@ -627,6 +628,7 @@ mt-10">
             <select
 
                 name="sort"
+                onchange="this.form.submit()"
 
                 class="
                 rounded-2xl
@@ -651,25 +653,25 @@ mt-10">
 
                 focus:outline-none">
 
-                <option value="-created_at">
+                <option value="-created_at" {% if selected_sort == "-created_at" %}selected{% endif %}>
 
                     Newest First
 
                 </option>
 
-                <option value="created_at">
+                <option value="created_at" {% if selected_sort == "created_at" %}selected{% endif %}>
 
                     Oldest First
 
                 </option>
 
-                <option value="-updated_at">
+                <option value="-updated_at" {% if selected_sort == "-updated_at" %}selected{% endif %}>
 
                     Recently Updated
 
                 </option>
 
-                <option value="title">
+                <option value="title" {% if selected_sort == "title" %}selected{% endif %}>
 
                     A → Z
 
