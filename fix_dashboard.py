@@ -1,4 +1,8 @@
-from django.conf import settings
+import os
+
+target = 'dashboard/views.py'
+
+logic = '''from django.conf import settings
 from django.shortcuts import render
 from blogs.models import Blog
 
@@ -32,3 +36,9 @@ def dashboard_view(request):
         "blogs/dashboard.html",
         context
     )
+'''
+
+with open(target, 'w', encoding='utf-8') as f:
+    f.write(logic)
+
+print("Dashboard views fixed")
